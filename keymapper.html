@@ -511,7 +511,7 @@
           A shortcut doesn't have to be a keybind at all — an entry can also be a
           <strong>button</strong> placed in Blender's UI. In the entry form, enable
           <strong>Button</strong> and pick one or more locations from the dropdown;
-          the button shows the entry's icon and/or label (both can be customized,
+          the button shows the entry's icon and/or label (both can be toggled,
           though at least one must stay on). Pressing it runs the first of the
           entry's operators that is valid in that context.
         </p>
@@ -519,7 +519,8 @@
           Keybind and Button can be combined on the same entry, but at least one of
           the two must remain enabled. A button-only entry registers no keybindings
           and disables no defaults — by default it is excluded from conflict
-          scanning, with an optional informational mode in its settings.
+          scanning, but an optional toggle can make it detect and disable shortcut
+          conflicts.
         </p>
 
         <figure class="doc-shot">
@@ -553,7 +554,7 @@
         <h1>Folders &amp; Presets</h1>
         <h2>Folders</h2>
         <p>
-          Entries are organized into collapsible folders. Use the toolbar to create,
+          Entries are organized into folders. Use the toolbar to create,
           remove, rename or move up/down folders. You can also move entries up/down,
           duplicate, and copy/paste entries between folders. The folder icon on the right side of the
           toolbar is specifically for moving entries to other folders.
