@@ -184,6 +184,21 @@
     margin-bottom: 2px;
   }
   .pager a.next { margin-left: auto; text-align: right; }
+  .pager a.superhive {
+    margin-left: auto;
+    align-self: center;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: linear-gradient(100deg, #3d1a6e 0%, #6d28b8 55%, #c936c9 100%);
+    transition: background 0.15s ease;
+  }
+  .pager a.superhive:hover {
+    background: linear-gradient(100deg, #4b2185 0%, #7f32d4 55%, #e13fe1 100%);
+  }
 
   footer {
     text-align: center;
@@ -724,11 +739,18 @@
       next.innerHTML = '<span class="pager-dir">Next &rarr;</span>' +
         document.getElementById(order[i + 1]).querySelector('h1').textContent;
       pager.appendChild(next);
+    } else {
+      const shop = document.createElement('a');
+      shop.href = '#';
+      shop.className = 'superhive';
+      shop.title = 'Add your store link here';
+      shop.textContent = 'Get it on Superhive!';
+      pager.appendChild(shop);
     }
     sec.appendChild(pager);
   });
 
-  document.querySelectorAll('.pager a').forEach(a => {
+  document.querySelectorAll('.pager a:not(.superhive)').forEach(a => {
     a.addEventListener('click', e => {
       e.preventDefault();
       const id = a.getAttribute('href').slice(1);
