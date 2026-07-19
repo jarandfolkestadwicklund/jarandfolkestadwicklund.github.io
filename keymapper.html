@@ -235,16 +235,26 @@
       <section id="overview" class="active">
         <h1>Overview</h1>
         <p>
-          Keymapper is a non-destructive keyboard and mouse shortcut manager for
-          Blender and Bforartists. It lets you build your own set of shortcuts in a
-          managed list — organized into folders, with one-click presets,
-          import/export, and live conflict detection.
+          Keymapper is a non-destructive shortcut manager for Blender and
+          Bforartists. It lets you build custom shortcuts in a managed list —
+          organized into folders, with one-click presets, import/export, and live
+          conflict detection.
         </p>
         <p>
-          Unlike editing Blender&rsquo;s keymap directly, Keymapper never rewrites the
-          factory keymap. When one of your shortcuts collides with a built-in
-          default, only that specific default is disabled — and it is restored
-          automatically the moment your shortcut is removed or deactivated.
+          Instead of editing Blender&rsquo;s keymap directly — which is destructive,
+          error-prone, and hard to undo — Keymapper layers your shortcuts on top.
+          When a shortcut collides with a built-in default, that specific default is
+          disabled, and it is restored automatically the moment the shortcut is
+          removed or deactivated. Nothing in the factory keymap is ever overwritten.
+        </p>
+        <p>
+          This layered approach also means you're never locked to a frozen keymap.
+          Keymapper works on top of whichever keyconfig you use — Blender, Industry
+          Compatible, Bforartists, or a custom template — and you can switch between
+          them freely. And when the Blender team adds or changes default keybindings
+          in a new version, those changes reach you as normal: everything you haven't
+          overridden stays stock, so your setup never falls behind the way a manually
+          edited or exported keymap does.
         </p>
 
         <figure class="doc-shot">
@@ -253,8 +263,9 @@
         <h2>Highlights</h2>
         <ul>
           <li><strong>Non-destructive</strong> — factory keybindings are never overwritten, only temporarily disabled while your shortcut needs the key.</li>
-          <li><strong>Multi-operator entries</strong> — one shortcut can bind many operators at once, so a single key works across every editor and mode.</li>
-          <li><strong>Conflict detection</strong> — see exactly which defaults and which of your own entries a shortcut collides with, before you commit.</li>
+          <li><strong>Any keyconfig</strong> — works on top of Blender, Industry Compatible, Bforartists, or custom templates, and switching stays safe.</li>
+          <li><strong>Multi-operator entries</strong> — one or more keybinds bound to many operators, so a single entry works across multiple editor contexts.</li>
+          <li><strong>Conflict detection</strong> — see exactly what a shortcut collides with — Blender's defaults, your own entries, and KMIs added by other addons — before you commit.</li>
           <li><strong>Presets</strong> — apply curated shortcut sets with one click, and restore any edited preset entry back to its original.</li>
           <li><strong>Import / Export</strong> — share your full setup as a single JSON file.</li>
         </ul>
