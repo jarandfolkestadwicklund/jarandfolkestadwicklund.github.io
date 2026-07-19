@@ -586,6 +586,26 @@
             you always know what a binding affects.
           </p>
         </div>
+        <h2>Turning the overriding off</h2>
+        <p>
+          By default, when one of your shortcuts conflicts with a built-in binding,
+          Keymapper <strong>overrides</strong> it — the colliding default is disabled
+          so your shortcut wins. If you'd rather keep certain defaults active, this
+          can be switched off per conflict type in the addon preferences, under
+          <code>Conflict Detection &gt; Conflict Overrides</code>:
+        </p>
+        <ul>
+          <li><strong>Override Shortcut Conflicts</strong> — controls whether defaults that do the same thing as your entry get disabled, with a sub-toggle for defaults whose operator properties differ.</li>
+          <li><strong>Override Keybind Conflicts</strong> — controls whether defaults sitting on the same key get disabled, with a per-action-value matrix (Press, Release, Click, Double Click, Click Drag) for fine-grained control over which event types count.</li>
+        </ul>
+        <p>
+          With an override switched off, conflicts of that type are still detected
+          and shown on the entry — but the default keybinding is left untouched.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="Images/06_ConflictDetection/05_3_OverrideDisable.png" alt="The Conflict Overrides settings in the addon preferences">
+        </figure>
         <p>
           What counts as a conflict is configurable in the addon preferences —
           including which keyconfig layers are scanned and how property and action
