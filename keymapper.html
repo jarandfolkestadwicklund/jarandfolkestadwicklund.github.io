@@ -355,6 +355,10 @@
           <img src="Images/03_GettingStarted/03_1_PanelVisibility.png" alt="The Panel Visibility toggles in the addon preferences">
         </figure>
 
+        <p>
+          This is the Keymapper panel as it appears in
+          <code>Preferences &gt; Keymap</code>, its default location:
+        </p>
         <figure class="doc-shot">
           <img src="Images/03_GettingStarted/03_1_PreferencesKeymap.png" alt="Keymapper panel in Preferences > Keymap">
         </figure>
@@ -422,19 +426,26 @@
           the operators never fight each other — the one that belongs to the editor
           you're in is the one that runs.
         </p>
+
+        <figure class="doc-shot">
+          <img src="Images/04_CreatingShortcuts/04_5_MultiOp.png" alt="A multi-operator entry's form with per-operator contexts and properties">
+        </figure>
         <p>
           This is what makes one key work "everywhere": a single Select All entry can
           carry <code>mesh.select_all</code>, <code>object.select_all</code>,
           <code>curve.select_all</code> and more, each scoped to its home context.
-          Multi-ops picked from the Simple browse mode come with the correct
-          per-operator contexts and properties already set. Contexts can be left on
-          automatic, where Keymapper resolves each operator's home keymaps for you,
-          or set manually per operator. The live conflict preview at the bottom of
-          the form updates as you edit.
+          Contexts can be left on automatic, where Keymapper resolves each operator's
+          home keymaps for you, or set manually per operator. The live conflict
+          preview at the bottom of the form updates as you edit.
+        </p>
+        <p>
+          The quickest way to build one is the <strong>Simple</strong> browse mode:
+          selecting a multi-op there adds the whole bundle of operators in one click,
+          with the correct per-operator contexts and properties already set.
         </p>
 
         <figure class="doc-shot">
-          <img src="Images/04_CreatingShortcuts/04_5_BrowseOperators_MultiOp.png" alt="A multi-operator entry with per-operator contexts and properties">
+          <img src="Images/04_CreatingShortcuts/04_5_BrowseOperators_MultiOp.png" alt="Selecting a multi-op bundle in the Simple browse mode">
         </figure>
 
       </section>
