@@ -240,6 +240,7 @@
       <a class="subsub" href="#labels-icons">Labels &amp; Icons</a>
       <a class="subsub" href="#entry-buttons">Entry Buttons</a>
       <a class="subsub" href="#detection-contexts">Detection Contexts</a>
+      <a class="sub" href="#bundled-operators">Bundled Operators</a>
       <a class="sub" href="#folders-presets">Folders &amp; Presets</a>
       <a class="sub" href="#conflicts">Conflict Detection</a>
       <a class="sub" href="#import-export">Import / Export</a>
@@ -283,6 +284,7 @@
           <li><strong>Multi-operator entries</strong> — one or more keybinds bound to many operators, so entries work across multiple editor contexts.</li>
           <li><strong>Conflict detection</strong> — see exactly what a shortcut collides with — Blender's defaults, your own KMIs, and KMIs added by other addons — before you commit.</li>
           <li><strong>Presets</strong> — apply curated shortcut sets with one click, and restore any edited preset entry back to its original.</li>
+          <li><strong>Bundled operators</strong> — extra tools like a marking menu and a tool-select pie, ready to bind.</li>
           <li><strong>Import / Export</strong> — share your full setup as a single JSON file.</li>
         </ul>
 
@@ -550,6 +552,42 @@
         </figure>
       </section>
 
+      <section id="bundled-operators">
+        <h1>Bundled Operators</h1>
+        <p>
+          Keymapper ships with a few operators of its own — extra tools that Blender
+          doesn't have, ready to be bound like any other operator. You'll find them
+          in <strong>Browse Operators</strong> under Keymapper's own subcategory in
+          the category "Addon Operators".
+        </p>
+        <ul>
+          <li><strong>Marking Menu</strong> — a pie menu for fast access to common actions.
+            <figure class="doc-shot">
+              <img src="Images/04.5_BundledOps/04.5_1_MarkingMenu.png" alt="The Marking Menu open in the 3D Viewport">
+            </figure>
+          </li>
+          <li><strong>Tool-Select Menu</strong> — a pie menu for switching the selection tool.
+            <figure class="doc-shot">
+              <img src="Images/04.5_BundledOps/04.5_2_ToolSelectMenu.png" alt="The Tool-Select pie menu">
+            </figure>
+          </li>
+          <li><strong>Pivot Transform</strong> — ability to easily edit the pivot point of an object.
+            <figure class="doc-shot">
+              <img src="Images/04.5_BundledOps/04.5_3_PivotEdit.png" alt="Pivot Transform in use">
+            </figure>
+          </li>
+          <li><strong>Open Asset Browser Window</strong> — opens the Asset Browser in its own separate window.
+            <figure class="doc-shot">
+              <img src="Images/04.5_BundledOps/04.5_4_AssetBrowserWindow.png" alt="The Asset Browser opened in its own window">
+            </figure>
+          </li>
+        </ul>
+        <p class="muted">
+          Marking Menu and Open Asset Browser are included in the shortcut presets,
+          so they work the moment you apply those — see Folders &amp; Presets.
+        </p>
+      </section>
+
       <section id="folders-presets">
         <h1>Folders &amp; Presets</h1>
         <h2>Folders</h2>
@@ -572,7 +610,9 @@
           The <strong>Shortcut Presets</strong> popup offers curated folders of
           ready-made shortcuts — navigation, selection, tools, pie menus and more.
           Apply everything with <strong>Add All</strong>, a single folder, or
-          individual entries.
+          individual entries. Some presets — like Marking Menu and Open Asset
+          Browser — bind Keymapper's own bundled operators, so they work the moment
+          you apply them.
         </p>
 
         <figure class="doc-shot small">
