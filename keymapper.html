@@ -208,14 +208,35 @@
     border-top: 1px solid var(--border);
   }
 
+  .nav-toggle { display: none; }
+
   /* Mobile */
   @media (max-width: 760px) {
     .layout { flex-direction: column; }
     nav.sidebar {
       width: 100%; height: auto; position: static;
       border-right: none; border-bottom: 1px solid var(--border);
-      padding: 12px 0;
+      padding: 0;
     }
+    .nav-toggle {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: none;
+      border: none;
+      text-align: left;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    nav.sidebar .nav-label,
+    nav.sidebar .nav-group,
+    nav.sidebar a { display: none; }
+    nav.sidebar.open .nav-label,
+    nav.sidebar.open .nav-group,
+    nav.sidebar.open a { display: block; }
+    nav.sidebar.open { padding-bottom: 12px; }
     main { padding: 28px 24px 60px; }
   }
 </style>
@@ -230,6 +251,7 @@
   <div class="layout">
 
     <nav class="sidebar">
+      <button class="nav-toggle" aria-expanded="false">&#9776;&nbsp; Documentation menu</button>
       <p class="nav-label">Keymapper</p>
       <a href="#overview" class="active">Overview</a>
       <p class="nav-group">How to use</p>
@@ -738,10 +760,19 @@
 <script>
   const links = document.querySelectorAll('nav.sidebar a');
   const sections = document.querySelectorAll('main section');
+  const sidebar = document.querySelector('nav.sidebar');
+  const navToggle = document.querySelector('.nav-toggle');
+
+  navToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
 
   function show(id) {
     sections.forEach(s => s.classList.toggle('active', s.id === id));
     links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    sidebar.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
     window.scrollTo(0, 0);
   }
 
