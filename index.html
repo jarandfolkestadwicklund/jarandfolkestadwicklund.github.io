@@ -246,8 +246,7 @@
     main { padding: 28px 24px 60px; }
     .project-main, .details { width: 100%; max-width: 640px; }
     .links a.superhive { order: 2; }
-    .gal-arrow.left { left: 8px; }
-    .gal-arrow.right { right: 8px; }
+    .project.open .gal-arrow { display: none; }
   }
 </style>
 </head>
@@ -396,10 +395,13 @@
     });
 
     // drag / swipe
+    track.querySelectorAll('img').forEach(im => { im.draggable = false; });
+    card.addEventListener('dragstart', e => e.preventDefault());
     let startX = null;
     let dx = 0;
     card.addEventListener('pointerdown', e => {
       if (!project.classList.contains('open')) return;
+      e.preventDefault();
       startX = e.clientX;
       dx = 0;
       card.setPointerCapture(e.pointerId);
