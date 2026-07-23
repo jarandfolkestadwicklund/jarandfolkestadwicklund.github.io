@@ -692,6 +692,10 @@
           can be switched off per conflict type in the addon preferences, under
           <code>Conflict Detection &gt; Conflict Overrides</code>:
         </p>
+
+        <figure class="doc-shot">
+          <img src="assets/doc/06_ConflictDetection/05_5_ConflictSettings.png" alt="The Conflict Overrides settings in the addon preferences">
+        </figure>
         <ul>
           <li><strong>Override Shortcut Conflicts</strong> — controls whether defaults that do the same thing as your entry get disabled, with a sub-toggle for defaults whose operator properties differ.</li>
           <li><strong>Override Keybind Conflicts</strong> — controls whether defaults sitting on the same key get disabled, with a per-action-value matrix (Press, Release, Click, Double Click, Click Drag) for fine-grained control over which event types count.</li>
@@ -700,15 +704,23 @@
           With an override switched off, conflicts of that type are still detected
           and shown on the entry — but the default keybinding is left untouched.
         </p>
-
-        <figure class="doc-shot">
-          <img src="assets/doc/06_ConflictDetection/05_3_OverrideDisable.png" alt="The Conflict Overrides settings in the addon preferences">
-        </figure>
         <p>
           What counts as a conflict is configurable in the addon preferences —
           including which keyconfig layers are scanned and how property and action
           values are compared.
         </p>
+
+        <p>
+          Overrides can also be controlled <strong>per entry</strong>. An entry's
+          conflict list shows every default it currently overrides, each with its own
+          checkbox — untick one, and that specific default stays enabled while the
+          rest of the entry works as normal. Handy when you want your key everywhere
+          except in a few contexts.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/doc/06_ConflictDetection/05_3_OverrideDisable.png" alt="An entry's keybind conflict overrides, with three manually disabled">
+        </figure>
       </section>
 
       <section id="import-export">
