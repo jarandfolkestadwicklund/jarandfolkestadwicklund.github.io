@@ -267,6 +267,7 @@
       <a class="sub" href="#conflicts">Conflict Detection</a>
       <a class="sub" href="#import-export">Import / Export</a>
       <a class="sub" href="#settings">Settings</a>
+      <a class="sub" href="#changelog">Changelog</a>
     </nav>
 
     <main>
@@ -386,16 +387,16 @@
 
       <section id="getting-started">
         <h1>Getting Started</h1>
-        <p>Keymapper's panel can be shown in three places, toggled in the addon preferences:</p>
+        <p>Keymapper's panel can be shown in three places:</p>
         <ul>
-          <li><code>Edit &gt; Preferences &gt; Keymap</code> — shown at the top of the Keymap section (default).</li>
+          <li><code>Edit &gt; Preferences &gt; Keymap</code> — shown at the top of the Keymap section. Always enabled, so at least one Keymapper panel exists.</li>
           <li>The <strong>N-panel</strong> in the 3D Viewport, under the Keymapper tab.</li>
           <li>The addon's own preferences page.</li>
         </ul>
         <p>
-          To choose where it shows, open the addon preferences
-          (<code>Edit &gt; Preferences &gt; Add-ons &gt; Keymapper</code>) and expand
-          the <strong>Panel Visibility</strong> dropdown — one toggle per location.
+          The N-panel and Addon Preferences locations are toggled in the addon
+          preferences (<code>Edit &gt; Preferences &gt; Add-ons &gt; Keymapper</code>)
+          under the <strong>Panel Visibility</strong> dropdown.
         </p>
 
         <figure class="doc-shot">
@@ -440,12 +441,26 @@
         <p>
           The fastest way to bind something you're looking at: right-click a button
           or menu item in the UI and choose <strong>Add Keymapper Shortcut
-          Entry&hellip;</strong> The entry form opens with that operator already
-          filled in — just set the keybind and confirm.
+          Entry&hellip;</strong>
         </p>
 
         <figure class="doc-shot">
           <img src="assets/doc/04_CreatingShortcuts/04_2_RightClickAdd.png" alt="Right-click menu with Add Keymapper Shortcut Entry">
+        </figure>
+        <p>
+          A popup panel opens with that operator already filled in — set the keybind
+          and confirm right there, without opening the full Keymapper panel. The
+          popup also has a button that redirects you to the full panel for further
+          editing; which panel it redirects to is configurable in the addon
+          preferences.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/doc/04_CreatingShortcuts/04_2_RightClickAddPopup.png" alt="The right-click add popup panel">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/doc/04_CreatingShortcuts/04_2.5_RedirectSetting.png" alt="The addon preference for choosing which panel the popup redirects to">
         </figure>
         <h2>Browse modes</h2>
         <ul>
@@ -508,6 +523,11 @@
           identifiers). Set a <strong>custom label</strong> in the entry form and it
           overrides the derived name entirely — useful when a bundle of operators
           deserves a name of its own.
+        </p>
+        <p>
+          Attribute-based operators get plain-language names too: an entry built on a
+          <code>wm.context_*</code> operator is named after the setting it changes,
+          so a shortcut reads "Face Orientation" rather than "Context Toggle".
         </p>
 
         <h2>Custom icons</h2>
@@ -749,9 +769,9 @@
         <h1>Settings</h1>
         <p>The addon preferences (<code>Edit &gt; Preferences &gt; Add-ons &gt; Keymapper</code>) contain:</p>
         <ul>
-          <li><strong>Panel Visibility</strong> — choose where the Keymapper panel appears (Keymap preferences, N-panel, addon preferences).</li>
+          <li><strong>Panel Visibility</strong> — choose where the Keymapper panel appears (N-panel, addon preferences — the Keymap location is always enabled), and where the right-click popup's edit button redirects to.</li>
           <li><strong>Conflict Detection</strong> — which keyconfig layers are scanned (Factory / User / Addon) and override rules for shortcut and keybind conflicts, including a per-action-value detection matrix.</li>
-          <li><strong>Other</strong> — extra options such as enabling the Factory browse mode.</li>
+          <li><strong>Other</strong> — Changelog and extra options such as enabling the Factory browse mode.</li>
         </ul>
 
         <figure class="doc-shot">
@@ -761,6 +781,39 @@
           Every checkbox shows a restore button whenever its value differs from the
           default, so you can always get back to stock behavior.
         </p>
+      </section>
+
+      <section id="changelog">
+        <h1>Changelog</h1>
+        <h2>1.1.0</h2>
+        <ul>
+          <li><strong>(NEW FEATURE) Right-Click add Popup Panel</strong><br>When adding a shortcut from the right-click menu, a popup panel now appears where you can finalize the shortcut creation without needing to open the full Keymapper panel.<br>There is also a button in the popup panel to re-direct you to the full Keymapper panel if you want to edit it further there.<br>Three new togglable options have therefore been added to the addon preferences, where you can select which Keymapper panel it should re-direct to.</li>
+          <li><strong>(NEW FEATURE) Changelog</strong><br>Added a collapsable changelog in addon preferences, making it possible to see everything that's changed since release.</li>
+          <li><strong>(NEW) Update notification.</strong><br>If Keymapper was installed through the online extension system, the main panel now shows an "Update Available!" banner when a newer version has been published. Clicking it opens Blender's extension list so you can install the update. The check reads the repository listing Blender itself has already downloaded, so it appears once Blender has checked for updates.</li>
+          <li><strong>(NEW) Every keybind of an entry now has its own slot.</strong><br>Entries with several keybinds previously showed only the first one plus a "+ N other keybindings" note. Each keybind is now listed in full on the entry card, and entries that also create a button show it beneath them.</li>
+          <li><strong>(NEW) Attribute names are now shown in plain language.</strong><br>Entries built on wm.context_* operators are named after the setting they change, so a shortcut now reads "Face Orientation" instead of "Context Toggle".</li>
+          <li><strong>(NEW) "Show in Keymap" is now permanently enabled, so at least one Keymapper panel always exists.</strong></li>
+          <li><strong>Reworked the entry editor layout.</strong><br>Icon, label and folder now share one row, the Keybind and Button checkboxes double as their section headers, and each selected operator sits in its own box with its properties below the context selector.</li>
+          <li><strong>Fixed internal conflicts not being detected for entries bound in global keymaps.</strong><br>An entry living in the Window or Screen keymap fires in every editor, but it was only compared against a fixed list of contexts. Anything outside that list — Animation, Sequencer, Grease Pencil modes and others — was treated as unrelated, so real collisions went unreported.</li>
+          <li><strong>Fixed conflicts being missed for operators that bind to many keymaps.</strong><br>Activating an entry registers its operator in every keymap that operator belongs to, but conflict detection only considered the first one, so collisions in the other keymaps went unreported.</li>
+          <li><strong>Fixed the conflicts list not refreshing after changing a keybind.</strong><br>Internal conflicts were served from a cache that was not cleared when the shortcut changed, so a conflict found with the previous keybind could stay listed after it no longer applied.</li>
+          <li><strong>Fixed a crash that could occur while scanning the keyconfig after enabling or disabling add-ons.</strong></li>
+          <li><strong>Fixed the enable checkbox doing nothing on an entry that had not been confirmed yet.</strong></li>
+          <li><strong>Fixed a button using the operator name instead of the entry label when no custom button label was set.</strong></li>
+          <li><strong>Updated Documentation to reflect changes.</strong></li>
+        </ul>
+        <h2>1.0.2</h2>
+        <ul>
+          <li><strong>Fixed a bug where the initial "Scan Keyconfig" prompt would not go away after pressing it if the Keymapper was installed through the online extension system.</strong></li>
+        </ul>
+        <h2>1.0.1</h2>
+        <ul>
+          <li><strong>Fixed a bug where default KMIs would get disabled from conflict detection even though conflict detection was set to disabled.</strong></li>
+        </ul>
+        <h2>1.0.0</h2>
+        <ul>
+          <li><strong>Initial release of Keymapper</strong></li>
+        </ul>
       </section>
 
     </main>
