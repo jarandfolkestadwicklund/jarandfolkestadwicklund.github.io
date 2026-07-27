@@ -785,6 +785,15 @@
 
       <section id="changelog">
         <h1>Changelog</h1>
+        <h2>1.1.2</h2>
+        <ul>
+          <li><strong>Fixed a duplicated entry silently disabling the original's shortcut after being moved above it.</strong></li>
+          <li><strong>Fixed the master Active/Inactive switch being bypassed by edits.</strong></li>
+          <li><strong>Fixed editing an entry bound identically to a Blender default killing its shortcut.</strong></li>
+          <li><strong>Fixed overridden Blender defaults sometimes staying disabled after their entry was removed.</strong></li>
+          <li><strong>Fixed "Restore KMIs" deleting some factory bindings that share one key.</strong></li>
+          <li><strong>Preset entries are now stored with the same complete field set as imported entries.</strong></li>
+        </ul>
         <h2>1.1.1</h2>
         <ul>
           <li><strong>Fixed picking a multi-operator in the Simple browse view also selecting a neighbouring one.</strong><br>A grouped operator counted as selected as soon as its first property variant was in the selection, so two groups that shared one variant lit up together.</li>
