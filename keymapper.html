@@ -155,6 +155,32 @@
   }
   .screenshot-placeholder .ph-desc { color: var(--muted); font-size: 0.9rem; max-width: 46ch; }
 
+  .cl-master { max-width: 68ch; margin-top: 28px; }
+  .cl-master > summary {
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin-bottom: 10px;
+  }
+  .cl-master > summary:hover { color: var(--accent); }
+
+  .cl-version {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 12px 0;
+    background: rgba(255,255,255,0.02);
+  }
+  .cl-version summary {
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 1.02rem;
+    padding: 12px 18px;
+  }
+  .cl-version summary:hover { color: var(--accent); }
+  .cl-version[open] > summary { border-bottom: 1px solid var(--border); }
+  .cl-version .cl-body { padding: 6px 20px 14px; }
+  .cl-version .cl-body h3:first-child { margin-top: 8px; }
+
   .pager {
     display: flex;
     justify-content: space-between;
@@ -186,7 +212,7 @@
   }
   .pager a.next { margin-left: auto; text-align: right; }
   .pager a.superhive {
-    margin-left: 12px;
+    margin-left: auto;
     align-self: center;
     border: none;
     border-radius: 999px;
@@ -268,7 +294,6 @@
       <a class="sub" href="#conflicts">Conflict Detection</a>
       <a class="sub" href="#import-export">Import / Export</a>
       <a class="sub" href="#settings">Settings</a>
-      <a href="#changelog">Changelog</a>
     </nav>
 
     <main>
@@ -313,6 +338,99 @@
         </ul>
         <h2>Compatibility</h2>
         <p>Blender, Bforartists &nbsp;&ndash;&nbsp; version 5.1 &ndash; 5.2</p>
+
+        <details class="cl-master">
+          <summary>Changelog</summary>
+<details class="cl-version">
+          <summary>1.2.0</summary>
+          <div class="cl-body">
+        <h3>New</h3>
+        <ul>
+          <li>Popup dialogs everywhere: Browse Operators, menu/pie/panel/tool value pickers, per-operator Context, Additional Keybind Detection Contexts, and button Locations now open as draggable dialogs instead of expanding inside the form. Each shows a "Selected" summary, a reset button, and Confirm/Cancel — changes only apply when you hit Confirm; Cancel, Esc, or clicking away discards them.</li>
+          <li>Addon Conflicts: conflicts with other addons' keymap items get their own dropdown, separate from Shortcut and Keybind conflicts.</li>
+          <li>Conflict previews: each conflict dropdown shows a live "(Preview - n)" count when your unsaved edits would change the result.</li>
+          <li>Button visibility toggle on the entry card: hide or show an entry's button in all its locations with one click, without removing anything.</li>
+          <li>Edit button locations straight from the entry card — click the locations line to open the picker.</li>
+          <li>Live button preview while editing, in both the main editor and the right-click popup.</li>
+          <li>Full tool list: the Set Tool picker now includes every tool from every editor and mode — previously only tools that had a keybinding appeared.</li>
+        </ul>
+        <h3>Improved</h3>
+        <ul>
+          <li>Clearer names everywhere: menus, pie menus, panels, operators, and tools that share a name are now told apart — "Add (View3D)", "Select All (Graph)", "Select More (Paint Face)", "Select Circle (Sequencer)", "Brush (Blur)". Menus and panels without a proper name get a readable one instead of a raw identifier.</li>
+          <li>Tools are organized into groups (Brush, Annotate, Select, Box, Extrude…), and the friendly/pure naming toggle is available in all the value pickers.</li>
+          <li>Redesigned selected-operators list: operators arrange into a responsive grid that adapts to the panel width, subcategories with a single operator pack side by side, and divider lines keep the groups readable.</li>
+          <li>Reworked operator editor: one Operators list with a Browse button, a Properties dropdown on each operator's row, and a cleaner header — Confirm/Cancel and the Icon/Label/Folder row sit in a fused header bar, with the form sections divided by subtle seams instead of nested borders.</li>
+          <li>The right-click quick-add popup now matches the main editor: same Button section, editable Context selector, detection contexts on keybind slots, and the button preview.</li>
+          <li>Deleting a folder selects the folder below it instead of jumping to the top.</li>
+          <li>Unbound keys are highlighted red until you assign one.</li>
+          <li>Polished entry cards: consistent rounded corners across all rows, cleaner icons, better spacing.</li>
+          <li>Tighter conflict lists, "Confirm" instead of "OK", "Re-scan" instead of "Re-scan Operators", and a Changelog link in the preferences.</li>
+        </ul>
+        <h3>Fixed</h3>
+        <ul>
+          <li>Cancelling the Context dialog could make the lower half of the editor disappear until Blender restarted.</li>
+          <li>Right-mouse shortcuts (like the "Context Menu" and "Marking Menu" presets) no longer show a false conflict with "Area Options" from Screen Editing — those bindings only fire on area edges and can't actually collide with your shortcuts.</li>
+          <li>Five preset folders (UI, Menus, View, Tool Selection, Object) were hidden in stock Blender.</li>
+          <li>Custom icons could show as the wrong (auto) icon in previews while editing an entry.</li>
+          <li>Long entry names no longer break the entry card's layout; long button labels no longer get cut off.</li>
+          <li>Buttons with the label hidden now fill the card row instead of shrinking.</li>
+        </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.1.1</summary>
+          <div class="cl-body">
+        <ul>
+          <li><strong>Fixed picking a multi-operator in the Simple browse view also selecting a neighbouring one.</strong><br>A grouped operator counted as selected as soon as its first property variant was in the selection, so two groups that shared one variant lit up together.</li>
+        </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.1.0</summary>
+          <div class="cl-body">
+        <ul>
+          <li><strong>(NEW FEATURE) Right-Click add Popup Panel</strong><br>When adding a shortcut from the right-click menu, a popup panel now appears where you can finalize the shortcut creation without needing to open the full Keymapper panel.<br>There is also a button in the popup panel to re-direct you to the full Keymapper panel if you want to edit it further there.<br>Three new togglable options have therefore been added to the addon preferences, where you can select which Keymapper panel it should re-direct to.</li>
+          <li><strong>(NEW FEATURE) Changelog</strong><br>Added a collapsable changelog in addon preferences, making it possible to see everything that's changed since release.</li>
+          <li><strong>(NEW) Update notification.</strong><br>If Keymapper was installed through the online extension system, the main panel now shows an "Update Available!" banner when a newer version has been published. Clicking it opens Blender's extension list so you can install the update. The check reads the repository listing Blender itself has already downloaded, so it appears once Blender has checked for updates.</li>
+          <li><strong>(NEW) Every keybind of an entry now has its own slot.</strong><br>Entries with several keybinds previously showed only the first one plus a "+ N other keybindings" note. Each keybind is now listed in full on the entry card, and entries that also create a button show it beneath them.</li>
+          <li><strong>(NEW) Attribute names are now shown in plain language.</strong><br>Entries built on wm.context_* operators are named after the setting they change, so a shortcut now reads "Face Orientation" instead of "Context Toggle".</li>
+          <li><strong>(NEW) "Show in Keymap" is now permanently enabled, so at least one Keymapper panel always exists.</strong></li>
+          <li><strong>Reworked the entry editor layout.</strong><br>Icon, label and folder now share one row, the Keybind and Button checkboxes double as their section headers, and each selected operator sits in its own box with its properties below the context selector.</li>
+          <li><strong>Fixed internal conflicts not being detected for entries bound in global keymaps.</strong><br>An entry living in the Window or Screen keymap fires in every editor, but it was only compared against a fixed list of contexts. Anything outside that list — Animation, Sequencer, Grease Pencil modes and others — was treated as unrelated, so real collisions went unreported.</li>
+          <li><strong>Fixed conflicts being missed for operators that bind to many keymaps.</strong><br>Activating an entry registers its operator in every keymap that operator belongs to, but conflict detection only considered the first one, so collisions in the other keymaps went unreported.</li>
+          <li><strong>Fixed the conflicts list not refreshing after changing a keybind.</strong><br>Internal conflicts were served from a cache that was not cleared when the shortcut changed, so a conflict found with the previous keybind could stay listed after it no longer applied.</li>
+          <li><strong>Fixed a crash that could occur while scanning the keyconfig after enabling or disabling add-ons.</strong></li>
+          <li><strong>Fixed the enable checkbox doing nothing on an entry that had not been confirmed yet.</strong></li>
+          <li><strong>Fixed a button using the operator name instead of the entry label when no custom button label was set.</strong></li>
+          <li><strong>Updated Documentation to reflect changes.</strong></li>
+        </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.0.2</summary>
+          <div class="cl-body">
+        <ul>
+          <li><strong>Fixed a bug where the initial "Scan Keyconfig" prompt would not go away after pressing it if the Keymapper was installed through the online extension system.</strong></li>
+        </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.0.1</summary>
+          <div class="cl-body">
+        <ul>
+          <li><strong>Fixed a bug where default KMIs would get disabled from conflict detection even though conflict detection was set to disabled.</strong></li>
+        </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.0.0</summary>
+          <div class="cl-body">
+        <ul>
+          <li><strong>Initial release of Keymapper</strong></li>
+        </ul>
+          </div>
+        </details>
+        </details>
       </section>
 
       <section id="installation">
@@ -805,75 +923,6 @@
         </p>
       </section>
 
-      <section id="changelog">
-        <h1>Changelog</h1>
-        <h2>1.2.0</h2>
-        <h3>New</h3>
-        <ul>
-          <li>Popup dialogs everywhere: Browse Operators, menu/pie/panel/tool value pickers, per-operator Context, Additional Keybind Detection Contexts, and button Locations now open as draggable dialogs instead of expanding inside the form. Each shows a "Selected" summary, a reset button, and Confirm/Cancel — changes only apply when you hit Confirm; Cancel, Esc, or clicking away discards them.</li>
-          <li>Addon Conflicts: conflicts with other addons' keymap items get their own dropdown, separate from Shortcut and Keybind conflicts.</li>
-          <li>Conflict previews: each conflict dropdown shows a live "(Preview - n)" count when your unsaved edits would change the result.</li>
-          <li>Button visibility toggle on the entry card: hide or show an entry's button in all its locations with one click, without removing anything.</li>
-          <li>Edit button locations straight from the entry card — click the locations line to open the picker.</li>
-          <li>Live button preview while editing, in both the main editor and the right-click popup.</li>
-          <li>Full tool list: the Set Tool picker now includes every tool from every editor and mode — previously only tools that had a keybinding appeared.</li>
-        </ul>
-        <h3>Improved</h3>
-        <ul>
-          <li>Clearer names everywhere: menus, pie menus, panels, operators, and tools that share a name are now told apart — "Add (View3D)", "Select All (Graph)", "Select More (Paint Face)", "Select Circle (Sequencer)", "Brush (Blur)". Menus and panels without a proper name get a readable one instead of a raw identifier.</li>
-          <li>Tools are organized into groups (Brush, Annotate, Select, Box, Extrude…), and the friendly/pure naming toggle is available in all the value pickers.</li>
-          <li>Redesigned selected-operators list: operators arrange into a responsive grid that adapts to the panel width, subcategories with a single operator pack side by side, and divider lines keep the groups readable.</li>
-          <li>Reworked operator editor: one Operators list with a Browse button, a Properties dropdown on each operator's row, and a cleaner header — Confirm/Cancel and the Icon/Label/Folder row sit in a fused header bar, with the form sections divided by subtle seams instead of nested borders.</li>
-          <li>The right-click quick-add popup now matches the main editor: same Button section, editable Context selector, detection contexts on keybind slots, and the button preview.</li>
-          <li>Deleting a folder selects the folder below it instead of jumping to the top.</li>
-          <li>Unbound keys are highlighted red until you assign one.</li>
-          <li>Polished entry cards: consistent rounded corners across all rows, cleaner icons, better spacing.</li>
-          <li>Tighter conflict lists, "Confirm" instead of "OK", "Re-scan" instead of "Re-scan Operators", and a Changelog link in the preferences.</li>
-        </ul>
-        <h3>Fixed</h3>
-        <ul>
-          <li>Cancelling the Context dialog could make the lower half of the editor disappear until Blender restarted.</li>
-          <li>Right-mouse shortcuts (like the "Context Menu" and "Marking Menu" presets) no longer show a false conflict with "Area Options" from Screen Editing — those bindings only fire on area edges and can't actually collide with your shortcuts.</li>
-          <li>Five preset folders (UI, Menus, View, Tool Selection, Object) were hidden in stock Blender.</li>
-          <li>Custom icons could show as the wrong (auto) icon in previews while editing an entry.</li>
-          <li>Long entry names no longer break the entry card's layout; long button labels no longer get cut off.</li>
-          <li>Buttons with the label hidden now fill the card row instead of shrinking.</li>
-        </ul>
-        <h2>1.1.1</h2>
-        <ul>
-          <li><strong>Fixed picking a multi-operator in the Simple browse view also selecting a neighbouring one.</strong><br>A grouped operator counted as selected as soon as its first property variant was in the selection, so two groups that shared one variant lit up together.</li>
-        </ul>
-        <h2>1.1.0</h2>
-        <ul>
-          <li><strong>(NEW FEATURE) Right-Click add Popup Panel</strong><br>When adding a shortcut from the right-click menu, a popup panel now appears where you can finalize the shortcut creation without needing to open the full Keymapper panel.<br>There is also a button in the popup panel to re-direct you to the full Keymapper panel if you want to edit it further there.<br>Three new togglable options have therefore been added to the addon preferences, where you can select which Keymapper panel it should re-direct to.</li>
-          <li><strong>(NEW FEATURE) Changelog</strong><br>Added a collapsable changelog in addon preferences, making it possible to see everything that's changed since release.</li>
-          <li><strong>(NEW) Update notification.</strong><br>If Keymapper was installed through the online extension system, the main panel now shows an "Update Available!" banner when a newer version has been published. Clicking it opens Blender's extension list so you can install the update. The check reads the repository listing Blender itself has already downloaded, so it appears once Blender has checked for updates.</li>
-          <li><strong>(NEW) Every keybind of an entry now has its own slot.</strong><br>Entries with several keybinds previously showed only the first one plus a "+ N other keybindings" note. Each keybind is now listed in full on the entry card, and entries that also create a button show it beneath them.</li>
-          <li><strong>(NEW) Attribute names are now shown in plain language.</strong><br>Entries built on wm.context_* operators are named after the setting they change, so a shortcut now reads "Face Orientation" instead of "Context Toggle".</li>
-          <li><strong>(NEW) "Show in Keymap" is now permanently enabled, so at least one Keymapper panel always exists.</strong></li>
-          <li><strong>Reworked the entry editor layout.</strong><br>Icon, label and folder now share one row, the Keybind and Button checkboxes double as their section headers, and each selected operator sits in its own box with its properties below the context selector.</li>
-          <li><strong>Fixed internal conflicts not being detected for entries bound in global keymaps.</strong><br>An entry living in the Window or Screen keymap fires in every editor, but it was only compared against a fixed list of contexts. Anything outside that list — Animation, Sequencer, Grease Pencil modes and others — was treated as unrelated, so real collisions went unreported.</li>
-          <li><strong>Fixed conflicts being missed for operators that bind to many keymaps.</strong><br>Activating an entry registers its operator in every keymap that operator belongs to, but conflict detection only considered the first one, so collisions in the other keymaps went unreported.</li>
-          <li><strong>Fixed the conflicts list not refreshing after changing a keybind.</strong><br>Internal conflicts were served from a cache that was not cleared when the shortcut changed, so a conflict found with the previous keybind could stay listed after it no longer applied.</li>
-          <li><strong>Fixed a crash that could occur while scanning the keyconfig after enabling or disabling add-ons.</strong></li>
-          <li><strong>Fixed the enable checkbox doing nothing on an entry that had not been confirmed yet.</strong></li>
-          <li><strong>Fixed a button using the operator name instead of the entry label when no custom button label was set.</strong></li>
-          <li><strong>Updated Documentation to reflect changes.</strong></li>
-        </ul>
-        <h2>1.0.2</h2>
-        <ul>
-          <li><strong>Fixed a bug where the initial "Scan Keyconfig" prompt would not go away after pressing it if the Keymapper was installed through the online extension system.</strong></li>
-        </ul>
-        <h2>1.0.1</h2>
-        <ul>
-          <li><strong>Fixed a bug where default KMIs would get disabled from conflict detection even though conflict detection was set to disabled.</strong></li>
-        </ul>
-        <h2>1.0.0</h2>
-        <ul>
-          <li><strong>Initial release of Keymapper</strong></li>
-        </ul>
-      </section>
-
     </main>
 
   </div>
@@ -923,7 +972,7 @@
         document.getElementById(order[i - 1]).querySelector('h1').textContent;
       pager.appendChild(prev);
     }
-    if (i < order.length - 1) {
+    if (i < order.length - 1 && id !== 'settings') {
       const next = document.createElement('a');
       next.href = '#' + order[i + 1];
       next.className = 'next';
@@ -940,7 +989,7 @@
       shop.textContent = 'Get it on Superhive!';
       pager.appendChild(shop);
     }
-    sec.appendChild(pager);
+    if (pager.children.length) sec.appendChild(pager);
   });
 
   document.querySelectorAll('.pager a:not(.superhive)').forEach(a => {
