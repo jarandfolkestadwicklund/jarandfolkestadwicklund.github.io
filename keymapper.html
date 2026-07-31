@@ -102,6 +102,7 @@
 
   main h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.01em; }
   main h2 { font-size: 1.15rem; font-weight: 650; margin: 28px 0 10px; }
+  main h3 { font-size: 0.98rem; font-weight: 650; margin: 18px 0 8px; color: var(--muted); }
   main p { margin-bottom: 12px; max-width: 68ch; }
   main ul, main ol { margin: 0 0 12px 22px; max-width: 66ch; }
   main li { margin-bottom: 6px; }
@@ -419,7 +420,7 @@
           <li><strong>Active / Inactive</strong> — the master switch. Turning it off unregisters all your shortcuts and restores every disabled default.</li>
           <li><strong>Keyconfig dropdown</strong> — the native keyconfig template Blender is using (Blender, Industry Compatible, etc.).</li>
           <li><strong>Restore KMIs</strong> — removes all Keymapper entries (KMIs = keymap items, Blender's individual keybinding entries) and restores defaults.</li>
-          <li><strong>Re-scan Operators</strong> — refreshes the operator and keymap scan; it turns red when a re-scan is recommended (e.g. after enabling other addons or switching keyconfig template).</li>
+          <li><strong>Re-scan</strong> — refreshes the operator and keymap scan; it turns red when a re-scan is recommended (e.g. after enabling other addons or switching keyconfig template).</li>
           <li><strong>Save</strong> — saves your entries; highlighted when there are unsaved changes.</li>
           <li><strong>F / P</strong> — toggles between friendly operator names and raw Python identifiers.</li>
         </ul>
@@ -450,6 +451,8 @@
         <p>
           A popup panel opens with that operator already filled in — set the keybind
           and confirm right there, without opening the full Keymapper panel. The
+          popup offers the same controls as the main editor: the Button section,
+          context selector, detection contexts, and button preview. The
           popup also has a button that redirects you to the full panel for further
           editing; which panel it redirects to is configurable in the addon
           preferences.
@@ -463,6 +466,13 @@
           <img src="assets/doc/04_CreatingShortcuts/04_2.5_RedirectSetting.png" alt="The addon preference for choosing which panel the popup redirects to">
         </figure>
         <h2>Browse modes</h2>
+        <p>
+          <strong>Browse Operators</strong> opens as a draggable popup dialog. A
+          "Selected" summary grows with your picks, and nothing is applied until you
+          press <strong>Confirm</strong> — Cancel, Esc, or clicking away discards the
+          changes. The same dialog style is used across the editor: value pickers,
+          per-operator Context, detection contexts, and button locations.
+        </p>
         <ul>
           <li><strong>All</strong> — every operator, organized into categories.</li>
           <li><strong>Simple</strong> — curated multi-operator actions, e.g. one "Select All" that covers every editor and mode at once.</li>
@@ -483,8 +493,10 @@
         <p>
           An entry can hold several operators and several extra keybinds at the same
           time. Each operator in the entry carries its own <strong>context</strong>
-          (which editor or mode it fires in) and its own <strong>properties</strong>,
-          editable per operator in the entry form. Because contexts don't overlap,
+          (which editor or mode it fires in) and its own <strong>properties</strong> —
+          each operator sits in the Operators list with its own context selector —
+          operators with editable properties also get a Properties dropdown on their
+          row. Because contexts don't overlap,
           the operators never fight each other — the one that belongs to the editor
           you're in is the one that runs.
         </p>
@@ -497,8 +509,9 @@
           carry <code>mesh.select_all</code>, <code>object.select_all</code>,
           <code>curve.select_all</code> and more, each scoped to its home context.
           Contexts can be left on automatic, where Keymapper resolves each operator's
-          home keymaps for you, or set manually per operator. The live conflict
-          preview at the bottom of the form updates as you edit.
+          home keymaps for you, or set manually per operator. While you edit, each conflict
+          dropdown shows a live "(Preview – n)" count whenever your unsaved changes
+          would alter the result.
         </p>
         <p>
           The quickest way to build one is the <strong>Simple</strong> browse mode:
@@ -549,11 +562,14 @@
         <h1>Entry Buttons</h1>
         <p>
           A shortcut doesn't have to be a keybind at all — an entry can also be a
-          <strong>button</strong> placed in Blender's UI. In the entry form, enable
-          <strong>Button</strong> and pick one or more locations from the dropdown;
-          the button shows the entry's icon and/or label (both can be toggled,
-          though at least one must stay on). Pressing it runs the first of the
-          entry's operators that is valid in that context.
+          <strong>button</strong> placed in Blender's UI. In the entry editor, enable
+          <strong>Button</strong> (Keybinds and Button share one section) and pick
+          one or more locations via the Locations dialog; the button shows the
+          entry's icon and/or label (both can be toggled, though at least one must
+          stay on), with a live preview while you edit — in both the main editor and the
+          right-click popup.
+          Pressing the button runs the first of the entry's operators that is valid
+          in that context.
         </p>
         <p>
           Keybind and Button can be combined on the same entry, but at least one of
@@ -561,6 +577,11 @@
           and disables no defaults — by default it is excluded from conflict
           scanning, but an optional toggle can make it detect and disable shortcut
           conflicts.
+        </p>
+        <p>
+          The entry card gives quick access too: a visibility toggle hides or shows
+          the entry's button in all its locations with one click, and clicking the
+          card's locations line opens the locations picker directly.
         </p>
 
         <figure class="doc-shot">
@@ -576,8 +597,9 @@
       <section id="detection-contexts">
         <h1>Additional Keybind Detection Contexts</h1>
         <p>
-          Every keybind slot in the entry form has an <strong>Additional Keybind
-          Detection Context(s)</strong> dropdown. Contexts checked here don't create
+          Every keybind slot has an <strong>Additional Keybind Detection
+          Context(s)</strong> picker, tucked behind a small arrow next to Repeat —
+          it opens as a popup dialog. Contexts checked here don't create
           a keybinding — they extend the conflict detection for that key, so
           same-key defaults in those extra contexts are disabled too. Use it when a
           default binding in a context your operators don't cover would otherwise
@@ -669,9 +691,10 @@
 
       <section id="conflicts">
         <h1>Conflict Detection</h1>
-        <p>Keymapper checks your entries against two kinds of conflicts:</p>
+        <p>Keymapper checks your entries against three kinds of conflicts:</p>
         <ul>
           <li><strong>Against Blender's defaults</strong> — shortcut conflicts (a default doing the same thing) and keybind conflicts (a different action already on your key).</li>
+          <li><strong>Against other addons</strong> — keymap items registered by other addons get their own Addon Conflicts dropdown, separate from Shortcut and Keybind conflicts.</li>
           <li><strong>Between your own entries</strong> — duplicates, shared keys, and overlapping operators, marked with a warning icon on the entry card.</li>
         </ul>
 
@@ -785,14 +808,37 @@
 
       <section id="changelog">
         <h1>Changelog</h1>
-        <h2>1.1.2</h2>
+        <h2>1.2.0</h2>
+        <h3>New</h3>
         <ul>
-          <li><strong>Fixed a duplicated entry silently disabling the original's shortcut after being moved above it.</strong></li>
-          <li><strong>Fixed the master Active/Inactive switch being bypassed by edits.</strong></li>
-          <li><strong>Fixed editing an entry bound identically to a Blender default killing its shortcut.</strong></li>
-          <li><strong>Fixed overridden Blender defaults sometimes staying disabled after their entry was removed.</strong></li>
-          <li><strong>Fixed "Restore KMIs" deleting some factory bindings that share one key.</strong></li>
-          <li><strong>Preset entries are now stored with the same complete field set as imported entries.</strong></li>
+          <li>Popup dialogs everywhere: Browse Operators, menu/pie/panel/tool value pickers, per-operator Context, Additional Keybind Detection Contexts, and button Locations now open as draggable dialogs instead of expanding inside the form. Each shows a "Selected" summary, a reset button, and Confirm/Cancel — changes only apply when you hit Confirm; Cancel, Esc, or clicking away discards them.</li>
+          <li>Addon Conflicts: conflicts with other addons' keymap items get their own dropdown, separate from Shortcut and Keybind conflicts.</li>
+          <li>Conflict previews: each conflict dropdown shows a live "(Preview - n)" count when your unsaved edits would change the result.</li>
+          <li>Button visibility toggle on the entry card: hide or show an entry's button in all its locations with one click, without removing anything.</li>
+          <li>Edit button locations straight from the entry card — click the locations line to open the picker.</li>
+          <li>Live button preview while editing, in both the main editor and the right-click popup.</li>
+          <li>Full tool list: the Set Tool picker now includes every tool from every editor and mode — previously only tools that had a keybinding appeared.</li>
+        </ul>
+        <h3>Improved</h3>
+        <ul>
+          <li>Clearer names everywhere: menus, pie menus, panels, operators, and tools that share a name are now told apart — "Add (View3D)", "Select All (Graph)", "Select More (Paint Face)", "Select Circle (Sequencer)", "Brush (Blur)". Menus and panels without a proper name get a readable one instead of a raw identifier.</li>
+          <li>Tools are organized into groups (Brush, Annotate, Select, Box, Extrude…), and the friendly/pure naming toggle is available in all the value pickers.</li>
+          <li>Redesigned selected-operators list: operators arrange into a responsive grid that adapts to the panel width, subcategories with a single operator pack side by side, and divider lines keep the groups readable.</li>
+          <li>Reworked operator editor: one Operators list with a Browse button, a Properties dropdown on operators that have editable properties, and a cleaner header — Confirm/Cancel and the Icon/Label/Folder row sit in a fused header bar, with the form sections divided by subtle seams instead of nested borders.</li>
+          <li>The right-click quick-add popup now matches the main editor: same Button section, editable Context selector, detection contexts on keybind slots, and the button preview.</li>
+          <li>Deleting a folder selects the folder below it instead of jumping to the top.</li>
+          <li>Unbound keys are highlighted red until you assign one.</li>
+          <li>Polished entry cards: consistent rounded corners across all rows, cleaner icons, better spacing.</li>
+          <li>Tighter conflict lists, "Confirm" instead of "OK", "Re-scan" instead of "Re-scan Operators", and a Changelog link in the preferences.</li>
+        </ul>
+        <h3>Fixed</h3>
+        <ul>
+          <li>Cancelling the Context dialog could make the lower half of the editor disappear until Blender restarted.</li>
+          <li>Right-mouse shortcuts (like the "Context Menu" and "Marking Menu" presets) no longer show a false conflict with "Area Options" from Screen Editing — those bindings only fire on area edges and can't actually collide with your shortcuts.</li>
+          <li>Five preset folders (UI, Menus, View, Tool Selection, Object) were hidden in stock Blender.</li>
+          <li>Custom icons could show as the wrong (auto) icon in previews while editing an entry.</li>
+          <li>Long entry names no longer break the entry card's layout; long button labels no longer get cut off.</li>
+          <li>Buttons with the label hidden now fill the card row instead of shrinking.</li>
         </ul>
         <h2>1.1.1</h2>
         <ul>
