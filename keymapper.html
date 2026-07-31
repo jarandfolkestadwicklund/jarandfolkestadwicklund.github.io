@@ -186,7 +186,7 @@
   }
   .pager a.next { margin-left: auto; text-align: right; }
   .pager a.superhive {
-    margin-left: auto;
+    margin-left: 12px;
     align-self: center;
     border: none;
     border-radius: 999px;
@@ -268,7 +268,7 @@
       <a class="sub" href="#conflicts">Conflict Detection</a>
       <a class="sub" href="#import-export">Import / Export</a>
       <a class="sub" href="#settings">Settings</a>
-      <a class="sub" href="#changelog">Changelog</a>
+      <a href="#changelog">Changelog</a>
     </nav>
 
     <main>
@@ -494,9 +494,8 @@
           An entry can hold several operators and several extra keybinds at the same
           time. Each operator in the entry carries its own <strong>context</strong>
           (which editor or mode it fires in) and its own <strong>properties</strong> —
-          each operator sits in the Operators list with its own context selector —
-          operators with editable properties also get a Properties dropdown on their
-          row. Because contexts don't overlap,
+          each operator sits in the Operators list with a Properties dropdown on its
+          row and its own context selector. Because contexts don't overlap,
           the operators never fight each other — the one that belongs to the editor
           you're in is the one that runs.
         </p>
@@ -824,7 +823,7 @@
           <li>Clearer names everywhere: menus, pie menus, panels, operators, and tools that share a name are now told apart — "Add (View3D)", "Select All (Graph)", "Select More (Paint Face)", "Select Circle (Sequencer)", "Brush (Blur)". Menus and panels without a proper name get a readable one instead of a raw identifier.</li>
           <li>Tools are organized into groups (Brush, Annotate, Select, Box, Extrude…), and the friendly/pure naming toggle is available in all the value pickers.</li>
           <li>Redesigned selected-operators list: operators arrange into a responsive grid that adapts to the panel width, subcategories with a single operator pack side by side, and divider lines keep the groups readable.</li>
-          <li>Reworked operator editor: one Operators list with a Browse button, a Properties dropdown on operators that have editable properties, and a cleaner header — Confirm/Cancel and the Icon/Label/Folder row sit in a fused header bar, with the form sections divided by subtle seams instead of nested borders.</li>
+          <li>Reworked operator editor: one Operators list with a Browse button, a Properties dropdown on each operator's row, and a cleaner header — Confirm/Cancel and the Icon/Label/Folder row sit in a fused header bar, with the form sections divided by subtle seams instead of nested borders.</li>
           <li>The right-click quick-add popup now matches the main editor: same Button section, editable Context selector, detection contexts on keybind slots, and the button preview.</li>
           <li>Deleting a folder selects the folder below it instead of jumping to the top.</li>
           <li>Unbound keys are highlighted red until you assign one.</li>
@@ -931,7 +930,8 @@
       next.innerHTML = '<span class="pager-dir">Next &rarr;</span>' +
         document.getElementById(order[i + 1]).querySelector('h1').textContent;
       pager.appendChild(next);
-    } else {
+    }
+    if (id === 'settings') {
       const shop = document.createElement('a');
       shop.href = 'https://superhivemarket.com/products/keymapper';
       shop.target = '_blank';
