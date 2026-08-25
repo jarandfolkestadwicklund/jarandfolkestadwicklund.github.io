@@ -342,6 +342,26 @@
         <details class="cl-master">
           <summary>Changelog</summary>
 <details class="cl-version">
+          <summary>1.3.0</summary>
+          <div class="cl-body">
+          <h3>New</h3>
+          <ul>
+            <li><strong>Import now offers Replace or Add.</strong><br>Importing a shortcut file when you already have entries asks whether to replace everything or add the imported set alongside what you have. Added entries keep their folders, and re-importing the same file no longer duplicates folders or collides with existing entries. A fresh setup imports straight away with no prompt.</li>
+          </ul>
+          <h3>Improved</h3>
+          <ul>
+            <li><strong>Outdated keymap names are now migrated automatically.</strong><br>Shortcuts saved under names Blender has since renamed are updated on load: "Grease Pencil Paint Mode" to "Grease Pencil Draw Mode", "SequencerCommon" to "Video Sequence Editor", "SequencerPreview" to "Preview", and "NLA Channels" to "NLA Tracks". Affected shortcuts start working again without any manual fixing. The Grease Pencil draw-mode context menu in the Context Menu preset is fixed by this.</li>
+            <li><strong>Improved conflict detection in the Video Sequencer.</strong><br>The sequencer preview keymap was listed under a name Blender doesn't use, so conflicts there went undetected.</li>
+          </ul>
+          <h3>Fixed</h3>
+          <ul>
+            <li><strong>Fixed a crash (EXCEPTION_ACCESS_VIOLATION) when restoring keymap items.</strong><br>Restoring a shortcut could hand Blender a keymap item with no factory original behind it. Blender dereferences that without checking and the process dies — a hard crash no error handling can catch. Keymapper now verifies a factory original exists before asking Blender to restore.</li>
+            <li><strong>Fixed phantom keymaps appearing in Preferences &gt; Keymap.</strong><br>Entries referring to a keymap that doesn't exist in your Blender version caused Keymapper to create an empty keymap Blender never routes input to — those shortcuts silently did nothing, and the leftover keymaps were what made the crash above possible. Keymapper now refuses to create a keymap that isn't real.</li>
+            <li><strong>Fixed restores targeting the wrong item in the addon keyconfig layer.</strong><br>Addon-layer restores were resolved against the active keyconfig instead of the addon one, so an ID collision could revert an unrelated shortcut.</li>
+          </ul>
+          </div>
+        </details>
+        <details class="cl-version">
           <summary>1.2.4</summary>
           <div class="cl-body">
           <h3>Fixed</h3>
@@ -413,6 +433,20 @@
           <li>Long entry names no longer break the entry card's layout; long button labels no longer get cut off.</li>
           <li>Buttons with the label hidden now fill the card row instead of shrinking.</li>
         </ul>
+          </div>
+        </details>
+        <details class="cl-version">
+          <summary>1.1.2</summary>
+          <div class="cl-body">
+          <h3>Fixed</h3>
+          <ul>
+            <li>Fixed a duplicated entry silently disabling the original's shortcut after being moved above it.</li>
+            <li>Fixed the master Active/Inactive switch being bypassed by edits.</li>
+            <li>Fixed editing an entry bound identically to a Blender default killing its shortcut.</li>
+            <li>Fixed overridden Blender defaults sometimes staying disabled after their entry was removed.</li>
+            <li>Fixed "Restore KMIs" deleting some factory bindings that share one key.</li>
+            <li>Preset entries are now stored with the same complete field set as imported entries.</li>
+          </ul>
           </div>
         </details>
         <details class="cl-version">
