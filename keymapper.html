@@ -342,6 +342,15 @@
         <details class="cl-master">
           <summary>Changelog</summary>
 <details class="cl-version">
+          <summary>1.3.2</summary>
+          <div class="cl-body">
+          <h3>Improved</h3>
+          <ul>
+            <li><strong>Much faster startup and file loading.</strong><br>Keymapper's operator scan was asking Blender for its operator list in a way that made Blender re-process the entire list once for every operator category. The scan now reads it once. Startup is around three times faster and opening or creating a file around six times faster, with a bigger improvement the more add-ons you have installed — the old approach got disproportionately slower as the number of operators grew.</li>
+          </ul>
+          </div>
+        </details>
+        <details class="cl-version">
           <summary>1.3.1</summary>
           <div class="cl-body">
           <h3>New</h3>
