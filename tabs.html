@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JFW — Tabs</title>
+<meta name="description" content="Tabs documentation — installing, showing the tab bar, adding and moving tabs, locked tabs, saving and loading, and settings.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JFW — Tabs">
+<meta property="og:description" content="Tabs, browser-style editor tabs for Blender.">
+<meta property="og:image" content="https://jarandfolkestadwicklund.github.io/assets/tabs/promo/Promo_1_Tabs.png">
+<meta property="og:url" content="https://jarandfolkestadwicklund.github.io/tabs.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+  :root {
+    --bg: #1b1d20;
+    --bar: #101113;
+    --sidebar: #17181b;
+    --surface: #232529;
+    --text: #e6e6e4;
+    --muted: #9a9fa6;
+    --border: #33373d;
+    --accent: #6fa8dc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    background: var(--bar);
+    color: #fff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar a.home {
+    color: #fff; text-decoration: none; font-weight: 700; letter-spacing: 0.15em;
+  }
+  .topbar .doc-title { color: var(--muted); font-size: 0.95rem; }
+
+  .layout { display: flex; min-height: calc(100vh - 55px); }
+
+  /* Sidebar */
+  nav.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    position: sticky;
+    top: 55px;
+    align-self: flex-start;
+    height: calc(100vh - 55px);
+    overflow-y: auto;
+  }
+  nav.sidebar .nav-label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); padding: 0 24px 10px;
+  }
+  nav.sidebar a {
+    display: block;
+    padding: 8px 24px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    border-left: 2px solid transparent;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  nav.sidebar .nav-group {
+    padding: 14px 24px 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  nav.sidebar a.sub { padding-left: 40px; font-size: 0.88rem; }
+  nav.sidebar a.subsub { padding-left: 56px; font-size: 0.84rem; }
+  nav.sidebar a:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+  nav.sidebar a.active {
+    color: var(--text);
+    border-left-color: var(--accent);
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* Content */
+  main {
+    flex: 1;
+    padding: 44px 56px 80px;
+    max-width: 820px;
+  }
+  main section { display: none; }
+  main section.active { display: block; }
+
+  main h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.01em; }
+  main h2 { font-size: 1.15rem; font-weight: 650; margin: 28px 0 10px; }
+  main h3 { font-size: 0.98rem; font-weight: 650; margin: 18px 0 8px; color: var(--muted); }
+  main p { margin-bottom: 12px; max-width: 68ch; }
+  main ul, main ol { margin: 0 0 12px 22px; max-width: 66ch; }
+  main li { margin-bottom: 6px; }
+  main .muted { color: var(--muted); }
+  main a { color: var(--accent); }
+  main code {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 0.88em;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    max-width: 68ch;
+  }
+  .callout p { margin: 0; }
+  .doc-shot { margin: 18px 0; max-width: 640px; }
+  .doc-shot.small { max-width: 300px; }
+  .shot-pair {
+    display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start;
+    margin: 18px 0;
+  }
+  .shot-pair .doc-shot { margin: 0; max-width: 220px; }
+  .shot-pair figcaption {
+    color: var(--muted); font-size: 0.85rem; margin-top: 6px;
+  }
+  .doc-shot img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .screenshot-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 200px;
+    max-width: 640px;
+    margin: 18px 0;
+    padding: 24px;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    text-align: center;
+  }
+  .screenshot-placeholder.small { max-width: 300px; min-height: 130px; }
+  .screenshot-placeholder .ph-label {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .screenshot-placeholder .ph-desc { color: var(--muted); font-size: 0.9rem; max-width: 46ch; }
+  .screenshot-placeholder .ph-path {
+    color: var(--muted); font-size: 0.78rem; opacity: 0.7;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+
+  .cl-master { max-width: 68ch; margin-top: 28px; }
+  .cl-master > summary {
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin-bottom: 10px;
+  }
+  .cl-master > summary:hover { color: var(--accent); }
+
+  .cl-version {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 12px 0;
+    background: rgba(255,255,255,0.02);
+  }
+  .cl-version summary {
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 1.02rem;
+    padding: 12px 18px;
+  }
+  .cl-version summary:hover { color: var(--accent); }
+  .cl-version[open] > summary { border-bottom: 1px solid var(--border); }
+  .cl-version .cl-body { padding: 6px 20px 14px; }
+  .cl-version .cl-body h3:first-child { margin-top: 8px; }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 640px;
+    margin-top: 44px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .pager a {
+    display: block;
+    max-width: 48%;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .pager a:hover { border-color: var(--accent); background: rgba(255,255,255,0.03); }
+  .pager a .pager-dir {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .pager a.next { margin-left: auto; text-align: right; }
+  .pager a.superhive {
+    margin-left: auto;
+    align-self: center;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background: linear-gradient(100deg, #3d1a6e 0%, #6d28b8 55%, #c936c9 100%);
+    transition: background 0.15s ease;
+  }
+  .pager a.superhive:hover {
+    background: linear-gradient(100deg, #4b2185 0%, #7f32d4 55%, #e13fe1 100%);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-toggle { display: none; }
+
+  /* Mobile */
+  @media (max-width: 760px) {
+    .layout { flex-direction: column; }
+    nav.sidebar {
+      width: 100%; height: auto; position: static;
+      border-right: none; border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .nav-toggle {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: none;
+      border: none;
+      text-align: left;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    nav.sidebar .nav-label,
+    nav.sidebar .nav-group,
+    nav.sidebar a { display: none; }
+    nav.sidebar.open .nav-label,
+    nav.sidebar.open .nav-group,
+    nav.sidebar.open a { display: block; }
+    nav.sidebar.open { padding-bottom: 12px; }
+    main { padding: 28px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="home" href="index.html">JFW</a>
+    <span class="doc-title">/ Tabs Documentation</span>
+  </div>
+
+  <div class="layout">
+
+    <nav class="sidebar">
+      <button class="nav-toggle" aria-expanded="false">☰&nbsp; Documentation menu</button>
+      <p class="nav-label">Tabs</p>
+      <a href="#overview" class="active">Overview</a>
+      <p class="nav-group">How to use</p>
+      <a class="sub" href="#installation">Installation</a>
+      <a class="sub" href="#basics">The Basics</a>
+      <a class="sub" href="#moving">Moving Tabs</a>
+      <a class="sub" href="#edges">Area Edges</a>
+      <a class="sub" href="#locked">Locked Tabs</a>
+      <a class="sub" href="#saving">Saving &amp; Loading</a>
+      <a class="sub" href="#settings">Settings</a>
+      <a class="sub" href="#bforartists">On Bforartists</a>
+    </nav>
+
+    <main>
+
+      <section id="overview" class="active">
+        <h1>Overview</h1>
+        <p>
+          Tabs gives a Blender editor browser-style tabs: one area holds several
+          editors, and you click a tab to switch. Each is a real editor with its own
+          view, scroll and tool.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/01_Overview/01_1_TabBar.png" alt="A tab bar above a 3D Viewport with four tabs">
+        </figure>
+
+        <h2>Highlights</h2>
+        <ul>
+          <li>Any number of editors per area, each keeping its state.</li>
+          <li>Drag tabs between areas and windows, or tear one off.</li>
+          <li>Lock the tabs a layout depends on.</li>
+          <li><code>Ctrl+T</code> to add a tab by name.</li>
+          <li>Saved in the .blend.</li>
+          <li>Follows your theme, or a palette you set.</li>
+        </ul>
+
+        <h2>Compatibility</h2>
+        <p>Blender, Bforartists &nbsp;–&nbsp; version 5.1 – 5.2</p>
+      </section>
+
+      <section id="installation">
+        <h1>Installation</h1>
+        <ul>
+          <li><strong>From Superhive</strong> — drag the Tabs entry from your orders page into Blender.</li>
+          <li><strong>Get Extensions</strong> — with Superhive as a repository, find Tabs and Install.</li>
+          <li><strong>The zip</strong> — drag it into Blender, or <strong>Install from Disk</strong>. Do not extract it.</li>
+        </ul>
+
+        <h2>Uninstalling</h2>
+        <p>
+          Run <strong>Disable Tab Bar for all Editors in all Workspaces</strong>
+          first, from <strong>Window &gt; Tabs</strong>: a bar is a real editor area,
+          so a .blend keeps its bars without it.
+        </p>
+      </section>
+
+      <section id="basics">
+        <h1>The Basics</h1>
+
+        <h2>Showing the tab bar</h2>
+        <p>
+          Every editor header has a <strong>Tabs</strong> button: click for a bar,
+          click again to remove it.
+        </p>
+
+        <figure class="doc-shot small">
+          <img src="assets/tabs/doc/02_Basics/02_1_TabsButton.png" alt="The Tabs button at the left of an editor header">
+        </figure>
+
+        <h2>Adding tabs</h2>
+        <ul>
+          <li>The <strong>+</strong> at the end of the bar.</li>
+          <li><code>Ctrl+T</code>, which searches by name and works with no bar.</li>
+          <li>Right-click the bar, <strong>New Tab</strong>.</li>
+        </ul>
+
+        <figure class="doc-shot small">
+          <img src="assets/tabs/doc/02_Basics/02_4_NewTabMenu.png" alt="The New Tab list, grouped by category">
+        </figure>
+
+        <p class="muted">
+          <code>Ctrl+T</code> does not fire in the 3D Viewport; Blender has it.
+          Rebind in the preferences.
+        </p>
+        <p>
+          A placeholder shows where the tab will land; a bar-less editor gets one
+          meanwhile.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/06_Search/06_1_SearchPlaceholder.png" alt="A placeholder New Tab at the end of the bar while the search is open">
+        </figure>
+
+        <figure class="doc-shot small">
+          <img src="assets/tabs/doc/06_Search/06_2_SearchRaisesBar.png" alt="A bar raised over the Outliner for the duration of the search, with the Outliner tinted">
+        </figure>
+
+        <h2>The menus</h2>
+        <p>
+          Right-click a <strong>tab</strong> for its own menu, or the
+          <strong>bar</strong> for the whole-bar one.
+        </p>
+
+        <figure class="doc-shot small">
+          <img src="assets/tabs/doc/02_Basics/02_2_TabMenu.png" alt="A tab's right-click menu, titled with the tab's name">
+        </figure>
+
+        <figure class="doc-shot small">
+          <img src="assets/tabs/doc/02_Basics/02_3_BarMenu.png" alt="The tab bar's own right-click menu">
+        </figure>
+
+        <h2>When the bar fills up</h2>
+        <p>
+          Tabs squeeze to fit, keeping their icon and close button. Past that the
+          bar scrolls, and so does the mouse wheel over it.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/02_Basics/02_6_CrowdedBar.png" alt="A crowded tab bar squeezed down to icons, with its scrollbar">
+        </figure>
+      </section>
+
+      <section id="moving">
+        <h1>Moving Tabs</h1>
+        <p>Where you drop a tab decides what happens:</p>
+        <ul>
+          <li><strong>On a tab bar</strong> — it lands there, across areas and windows.</li>
+          <li><strong>On a bar-less header</strong> — that editor gains a bar with the tab in it.</li>
+          <li><strong>Anywhere else</strong> — it tears off into its own window.</li>
+        </ul>
+
+        <h2>While you are dragging</h2>
+        <p>
+          The tab carries a picture of where it is going; the editor it came from
+          is blanked — red if it is going — with a mark on it:
+        </p>
+        <ul>
+          <li>the <strong>icon</strong> of the tab that takes over;</li>
+          <li>an <strong>X</strong> when it is the last tab: that editor is going;</li>
+          <li>an <strong>arrow</strong> beside it, showing which way a neighbour
+            sweeps in. No arrow means several editors share the space.</li>
+        </ul>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_2_SourceHighlight.png" alt="A tab dragged out of its bar: the editor it came from is dimmed, with the icon of the tab that takes over in the middle of it, while the dragged tab follows the cursor across the window">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_3_TakeoverMark.png" alt="The last tab dragged out of an editor: an X in the middle of the dimmed editor, and an arrow at the edge that will sweep across as the neighbour takes the space">
+        </figure>
+
+        <h2>Splitting with a tab</h2>
+        <p>
+          Hold <strong>Shift</strong> and the editor under the cursor offers to split,
+          nearest side lit; <strong>Shift + Space</strong> puts the seam under your
+          cursor. A preview that stays put and turns grey means the editor is too small
+          to split that way.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_4_ShiftSplit.png" alt="Shift held over the left of a 3D viewport: the preview grown into the half the split would make, with its own tab bar and the editor's background">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_5_SeamOffCentre.png" alt="Shift and Space held with the cursor off centre: the seam sits well left of the middle and the preview follows it">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_6_SplitRefused.png" alt="The same short editor twice: a left/right split, with the preview grown into the half it would make, above an up/down split refused, with the preview left at its resting size and drawn grey">
+        </figure>
+
+        <div class="callout">
+          <p>
+            An editor Tabs made exists to hold that tab: drag it out and it folds
+            away. Yours do too, unless <strong>Primary Areas Keep a Tab</strong>
+            is on.
+          </p>
+        </div>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_1_TornOff.png" alt="A torn-off window with its own tab bar holding two tabs">
+        </figure>
+
+        <p>
+          Leaving one tab behind takes the bar away; the Tabs button brings it back.
+          Torn-off windows keep theirs unless <strong>Close Tab Bar in Window when
+          one Tab remains</strong> is on.
+        </p>
+
+        <h2>Closing the last tab</h2>
+        <p>
+          The × on a lone tab takes the tab, bar and editor together — not offered
+          for a locked tab, with <strong>Primary Areas Keep a Tab</strong> on, or in
+          the last editor of the last window.
+        </p>
+        <p class="muted">
+          All of it is animated, and honours Blender's <strong>Reduce
+          Motion</strong> preference.
+        </p>
+      </section>
+
+      <section id="edges">
+        <h1>Area Edges</h1>
+        <p>
+          Right-click an edge for the Tabs edge menu instead of Blender's Area
+          Options. It has Split, Join and Swap as Blender's does, but treats a bar and
+          its editor as one thing, and adds <strong>Close Tab Bar</strong> /
+          <strong>Add Tab Bar</strong>. Entries that cannot apply are greyed.
+        </p>
+
+        <div class="shot-pair">
+          <figure class="doc-shot small">
+            <img src="assets/tabs/doc/08_Edges/08_1_EdgeMenu.png"
+                 alt="The Tabs edge menu on an edge that has a tab bar: Close Tab Bar, Vertical and Horizontal Split, Join Up, Join Down, Swap Areas">
+            <figcaption>On an edge that has a tab bar.</figcaption>
+          </figure>
+          <figure class="doc-shot small">
+            <img src="assets/tabs/doc/08_Edges/08_2_EdgeMenuAddBar.png"
+                 alt="The same menu on an edge with no tab bar, where the first entry reads Add Tab Bar instead of Close Tab Bar">
+            <figcaption>On an edge with none — the first entry mirrors.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="locked">
+        <h1>Locked Tabs</h1>
+        <p>
+          A locked tab cannot be closed, dragged or torn off. Locked tabs sit at the
+          front behind a separator line; Move Tab Left/Right reorders one.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/04_Locked/04_1_LockedTabs.png" alt="Two locked tabs with padlocks, the separator line, then two unlocked tabs and the + button">
+        </figure>
+
+        <p>
+          The tab an editor started with is its <strong>primary</strong>.
+          <strong>Lock Primary Tab</strong> locks every one at once; unlocking one by
+          hand is remembered.
+        </p>
+
+        <div class="callout">
+          <p>
+            <strong>Primary tab</strong> is a tab being locked. <strong>Primary
+            area</strong> is an editor you made yourself, and is about folding away.
+          </p>
+        </div>
+      </section>
+
+      <section id="saving">
+        <h1>Saving &amp; Loading</h1>
+        <p>
+          Tabs are always saved into the .blend; whether they return follows
+          Blender's <strong>Load UI</strong>:
+        </p>
+        <ul>
+          <li><strong>On</strong> — the file's layout loads and its tabs with it.</li>
+          <li><strong>Off</strong> — your layout is kept; <strong>Load Tabs from .blend</strong> decides whether the file's tabs land on your areas where they line up.</li>
+        </ul>
+
+        <p class="muted">
+          An area that only existed in the saved file is skipped, and recreating
+          that split by hand afterwards does not bring its tabs back. Bars come
+          back the first time you switch to a workspace.
+        </p>
+      </section>
+
+      <section id="settings">
+        <h1>Settings</h1>
+        <p>
+          <strong>Edit &gt; Preferences &gt; Add-ons &gt; Tabs</strong>. Every row has
+          a restore button, lit when it is not at its default.
+        </p>
+
+        <h2>Shortcuts</h2>
+        <p>
+          New Tab, Show/Hide Tab Bar and the bar's right-click binding, all
+          rebindable here. Show/Hide ships with no key — click the field and press
+          one.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_1_Shortcuts.png" alt="The four shortcut rows: New Tab, Show/Hide Tab Bar, Tabs Context Menu and Select Tab">
+        </figure>
+
+        <h2>Tabs</h2>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_2_TabsRows.png" alt="Load Tabs from .blend, Lock Primary Tab, Primary Areas Keep a Tab and Show + button in Tab Bar">
+        </figure>
+
+        <ul>
+          <li><strong>Load Tabs from .blend</strong> — see <a href="#saving">Saving &amp; Loading</a>.</li>
+          <li><strong>Lock Primary Tab</strong> — see <a href="#locked">Locked Tabs</a>.</li>
+          <li><strong>Show + button in Tab Bar</strong> — hidden, the tabs use that space.</li>
+          <li><strong>Select Tab</strong> — switch on <strong>Press</strong> (default) or <strong>Release</strong>.</li>
+        </ul>
+
+        <h2>Tab bars</h2>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_3_BarRows.png" alt="Always show Tab Bar with the four rows it governs indented under it">
+        </figure>
+
+        <ul>
+          <li><strong>Always show Tab Bar</strong> — a bar on every editor. It suspends the four rows under it.</li>
+          <li><strong>Show Tab Bar on Search</strong>, <strong>Create Tab Bar on Drop</strong>, <strong>Close Tab Bar when one Tab remains</strong>, and <strong>… in Window</strong> for windows other than the main one.</li>
+          <li><strong>Primary Areas Keep a Tab</strong> — on, your own editors hold their last tab.</li>
+        </ul>
+
+        <h2>The Tabs button</h2>
+        <p>
+          Whether it is shown, whether it is embossed, and which of four positions
+          it takes in the header. All three grey out under Always show Tab Bar,
+          which hides the button.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_4_ButtonRows.png" alt="Show Tabs Button, Tabs Button Embossed and Tabs Button Position">
+        </figure>
+
+        <h2>New Tab search</h2>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_5_SearchRows.png" alt="Show placeholder Tab on Search, Highlight editor on Search and Highlight Tab Bar on Search">
+        </figure>
+
+        <p>
+          Three indicators for where a new tab will go, each switchable: the
+          placeholder tab, a tint on the target editor, and a tint on its bar.
+        </p>
+
+        <h2>Appearance</h2>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_6_Appearance.png" alt="Tab Width, Tab Spacing, Show Separator Line and Colors">
+        </figure>
+
+        <p>
+          <strong>Tab Width</strong> fits each tab to its name or gives them all the
+          same width. <strong>Tab Spacing</strong> is the gap between tabs, and
+          <strong>Separator Line Spacing</strong> the gap either side of the line
+          after the locked ones.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/07_Appearance/07_3_TabWidth.png" alt="The same bar in Fit to Name and in Fixed Width">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/07_Appearance/07_1_TabSpacing.png" alt="The same bar at Tab Spacing 4, 6 and 20">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/07_Appearance/07_2_SeparatorSpacing.png" alt="The same bar at Separator Line Spacing 4 and 20, and with the line off">
+        </figure>
+
+        <h3>Colors</h3>
+        <p>
+          <strong>Follow Theme</strong> tracks your theme; <strong>Custom</strong>
+          opens fourteen rows — the bar, tab outline, selected and unselected tabs
+          and text, the separator, the + button, and six drag marks, where an
+          <strong>Indicator</strong> is a mark and a <strong>Highlight</strong> the
+          tint behind it. A split that cannot happen is always grey, whatever you
+          set here.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/07_Appearance/07_4_CustomColors.png" alt="The same bar following the theme and with a custom palette">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_7_Palette.png" alt="The Colors row set to Custom with all fourteen colour rows open">
+        </figure>
+
+        <h2>Bulk Actions</h2>
+        <p>
+          Give every editor a bar, take every bar away, or close all unlocked,
+          locked or every tab. Primaries are kept. Also in
+          <strong>Window &gt; Tabs</strong>.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_8_BulkActions.png" alt="The Bulk Actions section of the add-on preferences">
+        </figure>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_9_WindowMenu.png" alt="The Tabs submenu in Blender's Window menu">
+        </figure>
+      </section>
+
+      <section id="bforartists">
+        <h1>On Bforartists</h1>
+        <p>
+          Tabs works the same, with Bforartists' own icon set. One difference: it
+          draws the Editor Type dropdown before add-ons reach the header,
+          so two of the four button positions cannot be used. <strong>Tabs Button
+          Position</strong> offers <strong>After Editor Type</strong> (the default),
+          <strong>Right Group, First</strong> and <strong>Right Group, Last</strong>.
+          Each host keeps its own setting.
+        </p>
+      </section>
+
+    </main>
+
+  </div>
+
+<footer>© 2026 JFW (Jarand Folkestad Wicklund)</footer>
+
+<script>
+  const links = document.querySelectorAll('nav.sidebar a');
+  const sections = document.querySelectorAll('main section');
+  const sidebar = document.querySelector('nav.sidebar');
+  const navToggle = document.querySelector('.nav-toggle');
+
+  navToggle.addEventListener('click', () => {
+    const open = sidebar.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  function show(id) {
+    sections.forEach(s => s.classList.toggle('active', s.id === id));
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    sidebar.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+    window.scrollTo(0, 0);
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').slice(1);
+      history.replaceState(null, '', '#' + id);
+      show(id);
+    });
+  });
+
+  // Previous / Next pager at the bottom of every section
+  const order = Array.from(links).map(l => l.getAttribute('href').slice(1));
+  order.forEach((id, i) => {
+    const sec = document.getElementById(id);
+    if (!sec) return;
+    const pager = document.createElement('div');
+    pager.className = 'pager';
+    if (i > 0) {
+      const prev = document.createElement('a');
+      prev.href = '#' + order[i - 1];
+      prev.className = 'prev';
+      prev.innerHTML = '<span class="pager-dir">&larr; Previous</span>' +
+        document.getElementById(order[i - 1]).querySelector('h1').textContent;
+      pager.appendChild(prev);
+    }
+    if (i < order.length - 1) {
+      const next = document.createElement('a');
+      next.href = '#' + order[i + 1];
+      next.className = 'next';
+      next.innerHTML = '<span class="pager-dir">Next &rarr;</span>' +
+        document.getElementById(order[i + 1]).querySelector('h1').textContent;
+      pager.appendChild(next);
+    }
+    // No Superhive pill here yet — Tabs is not on sale. When it is, mirror
+    // keymapper.html: skip Next on the last section and append the shop link.
+    if (pager.children.length) sec.appendChild(pager);
+  });
+
+  document.querySelectorAll('.pager a:not(.superhive)').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      history.replaceState(null, '', '#' + id);
+      show(id);
+    });
+  });
+
+  // Open the section from the URL hash, if any
+  const initial = location.hash.slice(1);
+  if (initial && document.getElementById(initial)) show(initial);
+</script>
+
+</body>
+</html>
