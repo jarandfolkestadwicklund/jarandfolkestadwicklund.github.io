@@ -340,6 +340,7 @@
       <a class="sub" href="#locked">Locked Tabs</a>
       <a class="sub" href="#saving">Saving &amp; Loading</a>
       <a class="sub" href="#settings">Settings</a>
+      <a class="sub" href="#bforartists">On Bforartists</a>
     </nav>
 
     <main>
@@ -806,6 +807,26 @@
         </figure>
       </section>
 
+      <section id="bforartists">
+        <h1>On Bforartists</h1>
+        <p>
+          Tabs works the same on Bforartists, with Bforartists&rsquo; own icon set,
+          and the host is detected automatically &mdash; there is nothing to set.
+        </p>
+        <p>
+          One difference is visible. Bforartists draws the Editor Type dropdown
+          before an add-on can reach the header, so the slot to the left of it
+          does not exist and <strong>Before Editor Type</strong> is not offered.
+          <strong>Tabs Button Position</strong> lists three places here rather
+          than four: <strong>After Editor Type</strong> (the default),
+          <strong>Right Group, First</strong> and <strong>Right Group, Last</strong>.
+        </p>
+        <p>
+          Each host keeps its own setting, so moving the button on one never
+          moves it on the other.
+        </p>
+      </section>
+
     </main>
 
   </div>
@@ -841,13 +862,7 @@
   });
 
   // Previous / Next pager at the bottom of every section, and the shop pill
-  // on the last one.
-  //
-  // NOT ON SALE YET, so the last section ends with the index card's own
-  // "Coming soon" rather than a shop link — no URL to get wrong. When the
-  // product page exists, swap the span below for an <a class="superhive">
-  // with href and target="_blank"; the styling for that is already here and
-  // the click handler already excludes it.
+  // on the last one — the same shape keymapper.html uses.
   const order = Array.from(links).map(l => l.getAttribute('href').slice(1));
   const LAST = order[order.length - 1];
   order.forEach((id, i) => {
@@ -874,10 +889,13 @@
     // Takes Next's place on the last section, where keymapper.html puts its
     // shop button.
     if (id === LAST) {
-      const soon = document.createElement('span');
-      soon.className = 'soon';
-      soon.textContent = 'Coming soon';
-      pager.appendChild(soon);
+      const shop = document.createElement('a');
+      shop.href = 'https://superhivemarket.com/products/tabs';
+      shop.target = '_blank';
+      shop.rel = 'noopener';
+      shop.className = 'superhive';
+      shop.textContent = 'Get it on Superhive!';
+      pager.appendChild(shop);
     }
     if (pager.children.length) sec.appendChild(pager);
   });
