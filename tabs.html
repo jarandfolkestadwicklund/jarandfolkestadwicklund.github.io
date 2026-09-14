@@ -133,6 +133,26 @@
     margin: 18px 0;
   }
   .shot-pair .doc-shot { margin: 0; max-width: 220px; }
+  /* The Tabs button crops are 38x37 -- the glyph and nothing else -- and
+     .doc-shot img sets width:100%, so the 220px above would blow them up
+     almost six times. 114px is exactly 3x, and an INTEGER upscale stays crisp
+     with pixelated rather than being smoothed into a smudge -- so this number
+     moves in steps of 38, never to a value in between.
+
+     WIDTH, not just max-width. These figures are flex items and a flex item
+     sizes to its content, so the cap did nothing at all: the image's own 38px
+     is already under it, and `.doc-shot img { width: 100% }` then resolved to
+     38px right back. The large pairs elsewhere on the page are clamped BY
+     their max-width because their sources are hundreds of pixels wide, which
+     is why the same rule works there and not here. */
+  .shot-pair.icons .doc-shot { flex: 0 0 auto; width: 114px; max-width: 114px; }
+  /* Two more rungs on the same ladder as .doc-shot (640) and .small (300),
+     because several crops sit well outside both: a wide thin strip looks
+     soft blown up to 640, and a tall narrow menu at 300 is UPSCALED from its
+     own 263px and then towers over the text beside it. */
+  .doc-shot.mid { max-width: 520px; }
+  .doc-shot.xsmall { max-width: 220px; }
+  .shot-pair.icons .doc-shot img { image-rendering: pixelated; }
   .shot-pair figcaption {
     color: var(--muted); font-size: 0.85rem; margin-top: 6px;
   }
@@ -236,6 +256,24 @@
     background: linear-gradient(100deg, #3d1a6e 0%, #6d28b8 55%, #c936c9 100%);
     transition: background 0.15s ease;
   }
+  /* Not released yet — the same "Coming soon" the index card uses, wearing the
+     Superhive gradient as a RING rather than a fill, because it is not a link.
+     Two layers on one background: a solid fill clipped to the padding box, the
+     gradient clipped to the border box. The inner colour is --bg here and
+     --surface on the index, because that is what each one sits on. */
+  .pager span.soon {
+    margin-left: auto;
+    align-self: center;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    padding: 7px 19px;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      linear-gradient(100deg, #3d1a6e 0%, #6d28b8 55%, #c936c9 100%) border-box;
+  }
   .pager a.superhive:hover {
     background: linear-gradient(100deg, #4b2185 0%, #7f32d4 55%, #e13fe1 100%);
   }
@@ -302,7 +340,6 @@
       <a class="sub" href="#locked">Locked Tabs</a>
       <a class="sub" href="#saving">Saving &amp; Loading</a>
       <a class="sub" href="#settings">Settings</a>
-      <a class="sub" href="#bforartists">On Bforartists</a>
     </nav>
 
     <main>
@@ -335,17 +372,72 @@
 
       <section id="installation">
         <h1>Installation</h1>
-        <ul>
-          <li><strong>From Superhive</strong> — drag the Tabs entry from your orders page into Blender.</li>
-          <li><strong>Get Extensions</strong> — with Superhive as a repository, find Tabs and Install.</li>
-          <li><strong>The zip</strong> — drag it into Blender, or <strong>Install from Disk</strong>. Do not extract it.</li>
-        </ul>
+        <p>There are several ways to install Tabs — use whichever fits you best.</p>
+
+        <h2>Drag and drop from Superhive</h2>
+        <p>
+          The fastest route. On your Superhive orders page, drag the Tabs
+          extension straight from the browser into the Blender window. The first
+          time, Blender asks for your Superhive <strong>API token</strong> (found in
+          your Superhive account settings) and adds Superhive as a remote extension
+          repository.
+        </p>
+        <div class="callout">
+          <p>
+            Once connected, all your Superhive purchases appear under
+            <code>Preferences &gt; Get Extensions</code> with one-click Install — and
+            you get update notifications inside Blender whenever a new version is
+            released.
+          </p>
+        </div>
+
+        <p class="muted">
+          See Superhive&rsquo;s own guides:
+          <a href="https://superhivemarket.com/posts/blender-extension-support-launched-on-superhive" target="_blank" rel="noopener">extension support announcement</a>
+          and
+          <a href="https://support.superhivemarket.com/article/335-connecting-superhive-as-a-remote-repository-in-blender" target="_blank" rel="noopener">connecting Superhive as a remote repository</a>.
+        </p>
+
+        <h2>Install through Blender's extension system</h2>
+        <p>
+          With Superhive connected as a remote repository (see above), open
+          <code>Edit &gt; Preferences &gt; Get Extensions</code>, find Tabs in the
+          list, and press <strong>Install</strong>. Updates later are a single click
+          on <strong>Update</strong>.
+        </p>
+
+        <h2>Drag and drop the downloaded zip</h2>
+        <p>
+          Download the Tabs <code>.zip</code> from Superhive (do not extract it),
+          then drag the file from your file browser into the Blender window and
+          confirm the install prompt.
+        </p>
+
+        <h2>Install from Disk</h2>
+        <ol>
+          <li>Download the Tabs <code>.zip</code> from Superhive. Do not extract it.</li>
+          <li>In Blender, open <code>Edit &gt; Preferences &gt; Add-ons</code>.</li>
+          <li>Click the dropdown arrow in the top-right corner and choose <strong>Install from Disk…</strong></li>
+          <li>Select the downloaded <code>.zip</code> and confirm.</li>
+          <li>Make sure the checkbox next to <strong>Tabs</strong> is enabled.</li>
+        </ol>
+        <div class="callout">
+          <p>All methods work in Bforartists too — Tabs detects the host application automatically.</p>
+        </div>
+
+        <h2>Updating</h2>
+        <p>
+          Via the Superhive repository: press <strong>Update</strong> in
+          <code>Get Extensions</code>. Manually: install the new version over the old
+          one and restart. Your tabs, settings, and colours are preserved either way.
+        </p>
 
         <h2>Uninstalling</h2>
         <p>
           Run <strong>Disable Tab Bar for all Editors in all Workspaces</strong>
           first, from <strong>Window &gt; Tabs</strong>: a bar is a real editor area,
-          so a .blend keeps its bars without it.
+          so a .blend keeps its bars without it. Then disable or remove Tabs from the
+          Add-ons list.
         </p>
       </section>
 
@@ -355,28 +447,40 @@
         <h2>Showing the tab bar</h2>
         <p>
           Every editor header has a <strong>Tabs</strong> button: click for a bar,
-          click again to remove it.
+          click again to remove it. It lights up while the bar is showing, so the
+          header always says which state the editor is in.
         </p>
 
-        <figure class="doc-shot small">
-          <img src="assets/tabs/doc/02_Basics/02_1_TabsButton.png" alt="The Tabs button at the left of an editor header">
-        </figure>
+        <div class="shot-pair icons">
+          <figure class="doc-shot small">
+            <img src="assets/tabs/doc/02_Basics/02_1_TabsButton_ON.png"
+                 alt="The Tabs button lit, with the tab bar showing">
+          </figure>
+          <figure class="doc-shot small">
+            <img src="assets/tabs/doc/02_Basics/02_1_TabsButton_OFF.png"
+                 alt="The same button unlit, with no tab bar">
+          </figure>
+        </div>
 
         <h2>Adding tabs</h2>
         <ul>
-          <li>The <strong>+</strong> at the end of the bar.</li>
           <li><code>Ctrl+T</code>, which searches by name and works with no bar.</li>
+          <li>The <strong>+</strong> at the end of the bar.</li>
           <li>Right-click the bar, <strong>New Tab</strong>.</li>
         </ul>
 
-        <figure class="doc-shot small">
-          <img src="assets/tabs/doc/02_Basics/02_4_NewTabMenu.png" alt="The New Tab list, grouped by category">
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/06_Search/06_0_SearchPopup.png" alt="The Ctrl+T search box over an editor, sh typed into it and eight matching editors listed, with a placeholder New Tab lit at the end of the bar">
         </figure>
 
-        <p class="muted">
-          <code>Ctrl+T</code> does not fire in the 3D Viewport; Blender has it.
-          Rebind in the preferences.
-        </p>
+        <figure class="doc-shot mid">
+          <img src="assets/tabs/doc/02_Basics/02_4_NewTabClick.png" alt="The cursor on the + button at the end of a tab bar holding three tabs">
+        </figure>
+
+        <figure class="doc-shot xsmall">
+          <img src="assets/tabs/doc/02_Basics/02_4_NewTabMenu.png" alt="The right-click New Tab list, every editor grouped by category">
+        </figure>
+
         <p>
           A placeholder shows where the tab will land; a bar-less editor gets one
           meanwhile.
@@ -431,14 +535,17 @@
         </p>
         <ul>
           <li>the <strong>icon</strong> of the tab that takes over;</li>
-          <li>an <strong>X</strong> when it is the last tab: that editor is going;</li>
-          <li>an <strong>arrow</strong> beside it, showing which way a neighbour
-            sweeps in. No arrow means several editors share the space.</li>
         </ul>
 
         <figure class="doc-shot">
           <img src="assets/tabs/doc/03_Moving/03_2_SourceHighlight.png" alt="A tab dragged out of its bar: the editor it came from is dimmed, with the icon of the tab that takes over in the middle of it, while the dragged tab follows the cursor across the window">
         </figure>
+
+        <ul>
+          <li>an <strong>X</strong> when it is the last tab: that editor is going;</li>
+          <li>an <strong>arrow</strong> beside it, showing which way a neighbour
+            sweeps in. No arrow means several editors share the space.</li>
+        </ul>
 
         <figure class="doc-shot">
           <img src="assets/tabs/doc/03_Moving/03_3_TakeoverMark.png" alt="The last tab dragged out of an editor: an X in the middle of the dimmed editor, and an arrow at the edge that will sweep across as the neighbour takes the space">
@@ -446,22 +553,33 @@
 
         <h2>Splitting with a tab</h2>
         <p>
-          Hold <strong>Shift</strong> and the editor under the cursor offers to split,
-          nearest side lit; <strong>Shift + Space</strong> puts the seam under your
-          cursor. A preview that stays put and turns grey means the editor is too small
-          to split that way.
+          Hold <strong>Shift</strong> and the editor under the cursor offers to
+          split. The side nearest the cursor lights up, and the preview grows into
+          the half the new editor would take — tab bar and all.
         </p>
 
         <figure class="doc-shot">
-          <img src="assets/tabs/doc/03_Moving/03_4_ShiftSplit.png" alt="Shift held over the left of a 3D viewport: the preview grown into the half the split would make, with its own tab bar and the editor's background">
+          <img src="assets/tabs/doc/03_Moving/03_4_ShiftSplit.png" alt="Shift held over the right of a tabbed editor: the preview grown into the half the split would make, with a tab bar of its own across the top of it">
         </figure>
 
-        <figure class="doc-shot">
-          <img src="assets/tabs/doc/03_Moving/03_5_SeamOffCentre.png" alt="Shift and Space held with the cursor off centre: the seam sits well left of the middle and the preview follows it">
-        </figure>
+        <p>
+          Hold <strong>Shift + Spacebar</strong> and the seam follows your cursor instead
+          of sitting at the halfway mark, so you place the split where you want it
+          before you let go.
+        </p>
 
         <figure class="doc-shot">
-          <img src="assets/tabs/doc/03_Moving/03_6_SplitRefused.png" alt="The same short editor twice: a left/right split, with the preview grown into the half it would make, above an up/down split refused, with the preview left at its resting size and drawn grey">
+          <img src="assets/tabs/doc/03_Moving/03_5_SeamOffCentre.png" alt="Shift and Space held with the cursor off centre: the seam sits well right of the middle and the preview follows it">
+        </figure>
+
+        <p>
+          A preview that stays at its resting size and turns grey is a refusal: the
+          editor has no room to be cut that way. The same Timeline takes a vertical
+          split and refuses a horizontal one.
+        </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_6_SplitRefused.png" alt="A Timeline twice: a vertical split, with the preview grown into the half it would make, above a horizontal split refused, with the preview left at its resting size and drawn grey">
         </figure>
 
         <div class="callout">
@@ -472,15 +590,15 @@
           </p>
         </div>
 
-        <figure class="doc-shot">
-          <img src="assets/tabs/doc/03_Moving/03_1_TornOff.png" alt="A torn-off window with its own tab bar holding two tabs">
-        </figure>
-
         <p>
           Leaving one tab behind takes the bar away; the Tabs button brings it back.
           Torn-off windows keep theirs unless <strong>Close Tab Bar in Window when
           one Tab remains</strong> is on.
         </p>
+
+        <figure class="doc-shot">
+          <img src="assets/tabs/doc/03_Moving/03_1_TornOff.png" alt="Tearing a tab off: the dragged tab carries a preview of the window it will become, which follows the shape of the drop, and the result is a separate Blender window with its own tab bar">
+        </figure>
 
         <h2>Closing the last tab</h2>
         <p>
@@ -680,20 +798,12 @@
         </figure>
 
         <figure class="doc-shot">
+          <img src="assets/tabs/doc/05_Settings/05_9_WindowMenuEntry.png" alt="The Window menu with the Tabs entry at the bottom">
+        </figure>
+
+        <figure class="doc-shot">
           <img src="assets/tabs/doc/05_Settings/05_9_WindowMenu.png" alt="The Tabs submenu in Blender's Window menu">
         </figure>
-      </section>
-
-      <section id="bforartists">
-        <h1>On Bforartists</h1>
-        <p>
-          Tabs works the same, with Bforartists' own icon set. One difference: it
-          draws the Editor Type dropdown before add-ons reach the header,
-          so two of the four button positions cannot be used. <strong>Tabs Button
-          Position</strong> offers <strong>After Editor Type</strong> (the default),
-          <strong>Right Group, First</strong> and <strong>Right Group, Last</strong>.
-          Each host keeps its own setting.
-        </p>
       </section>
 
     </main>
@@ -730,8 +840,16 @@
     });
   });
 
-  // Previous / Next pager at the bottom of every section
+  // Previous / Next pager at the bottom of every section, and the shop pill
+  // on the last one.
+  //
+  // NOT ON SALE YET, so the last section ends with the index card's own
+  // "Coming soon" rather than a shop link — no URL to get wrong. When the
+  // product page exists, swap the span below for an <a class="superhive">
+  // with href and target="_blank"; the styling for that is already here and
+  // the click handler already excludes it.
   const order = Array.from(links).map(l => l.getAttribute('href').slice(1));
+  const LAST = order[order.length - 1];
   order.forEach((id, i) => {
     const sec = document.getElementById(id);
     if (!sec) return;
@@ -745,7 +863,7 @@
         document.getElementById(order[i - 1]).querySelector('h1').textContent;
       pager.appendChild(prev);
     }
-    if (i < order.length - 1) {
+    if (i < order.length - 1 && id !== LAST) {
       const next = document.createElement('a');
       next.href = '#' + order[i + 1];
       next.className = 'next';
@@ -753,8 +871,14 @@
         document.getElementById(order[i + 1]).querySelector('h1').textContent;
       pager.appendChild(next);
     }
-    // No Superhive pill here yet — Tabs is not on sale. When it is, mirror
-    // keymapper.html: skip Next on the last section and append the shop link.
+    // Takes Next's place on the last section, where keymapper.html puts its
+    // shop button.
+    if (id === LAST) {
+      const soon = document.createElement('span');
+      soon.className = 'soon';
+      soon.textContent = 'Coming soon';
+      pager.appendChild(soon);
+    }
     if (pager.children.length) sec.appendChild(pager);
   });
 
