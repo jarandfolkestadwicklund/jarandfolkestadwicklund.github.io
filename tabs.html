@@ -156,6 +156,17 @@
   .cl-version .cl-body h3:first-child { margin-top: 8px; }
 
   .doc-shot { margin: 18px 0; max-width: 640px; }
+  /* The animated figures sit ALONGSIDE the stills, not instead of them: a
+     still carries the detail, the loop carries the motion. Labelled, because
+     a reader should know a picture is going to move before it does. */
+  .gif-gap { height: 26px; }
+  .doc-gif { margin: 0 0 34px; max-width: 640px; }
+  .doc-gif img { border-radius: 6px; display: block; }
+  .doc-gif figcaption {
+    color: var(--muted);
+    font-size: 0.84rem;
+    margin-bottom: 6px;
+  }
   .doc-shot.small { max-width: 300px; }
   .shot-pair {
     display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start;
@@ -395,6 +406,29 @@
           <li>Saved in the .blend.</li>
           <li>Follows your theme, or a palette you set.</li>
         </ul>
+
+
+        <div class="gif-gap"></div>
+
+        <figure class="doc-gif">
+          <figcaption>Adding tabs to an area</figcaption>
+          <img src="assets/tabs/doc/gifs/Tabs_01_CreatingTabs.gif" alt="Adding tabs to an editor: the bar appears and a tab is added for each new editor" loading="lazy">
+        </figure>
+
+        <figure class="doc-gif">
+          <figcaption>Dragging a tab to its own window and into another tab bar</figcaption>
+          <img src="assets/tabs/doc/gifs/Tabs_02_DragAndDrop.gif" alt="A tab dragged from one editor's bar and dropped onto another" loading="lazy">
+        </figure>
+
+        <figure class="doc-gif">
+          <figcaption>Shift-dropping to split areas</figcaption>
+          <img src="assets/tabs/doc/gifs/Tabs_03_ShiftSplit.gif" alt="Holding Shift while dropping a tab: the editor under the cursor offers to split, and releasing creates a new editor with the tab in it" loading="lazy">
+        </figure>
+
+        <figure class="doc-gif">
+          <figcaption>Tabs adjusting size to fit in a tab bar</figcaption>
+          <img src="assets/tabs/doc/gifs/Tabs_04_BarFill.gif" alt="Tabs being added one after another until the bar squeezes them down to icons" loading="lazy">
+        </figure>
 
         <h2>Compatibility</h2>
         <p>Blender, Bforartists &nbsp;–&nbsp; version 5.1 – 5.2</p>
