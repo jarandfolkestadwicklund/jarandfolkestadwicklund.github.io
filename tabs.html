@@ -126,6 +126,35 @@
     max-width: 68ch;
   }
   .callout p { margin: 0; }
+
+  /* Changelog -- the same markup and styling keymapper.html uses, so the two
+     pages read alike. */
+  .cl-master { max-width: 68ch; margin-top: 28px; }
+  .cl-master > summary {
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin-bottom: 10px;
+  }
+  .cl-master > summary:hover { color: var(--accent); }
+
+  .cl-version {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 12px 0;
+    background: rgba(255,255,255,0.02);
+  }
+  .cl-version summary {
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 1.02rem;
+    padding: 12px 18px;
+  }
+  .cl-version summary:hover { color: var(--accent); }
+  .cl-version[open] > summary { border-bottom: 1px solid var(--border); }
+  .cl-version .cl-body { padding: 6px 20px 14px; }
+  .cl-version .cl-body h3:first-child { margin-top: 8px; }
+
   .doc-shot { margin: 18px 0; max-width: 640px; }
   .doc-shot.small { max-width: 300px; }
   .shot-pair {
@@ -369,6 +398,36 @@
 
         <h2>Compatibility</h2>
         <p>Blender, Bforartists &nbsp;–&nbsp; version 5.1 – 5.2</p>
+
+        <details class="cl-master">
+          <summary>Changelog</summary>
+          <details class="cl-version">
+            <summary>1.0.1</summary>
+            <div class="cl-body">
+            <h3>Fixed</h3>
+            <ul>
+              <li><strong>Enable Tab Bar for all Editors in all Workspaces now
+                works while Always show Tab Bar is on.</strong><br>The button
+                was greyed out whenever that preference was enabled. Disable
+                stays unavailable in that case, since the preference puts every
+                bar straight back.</li>
+              <li><strong>Always show Tab Bar now reaches every
+                workspace.</strong><br>It stopped after 24 tab bars across the
+                file, so editors in workspaces you opened later went without
+                one until you toggled the preference off and on again.</li>
+            </ul>
+            </div>
+          </details>
+          <details class="cl-version">
+            <summary>1.0.0</summary>
+            <div class="cl-body">
+            <h3>New</h3>
+            <ul>
+              <li><strong>Initial release of Tabs</strong></li>
+            </ul>
+            </div>
+          </details>
+        </details>
       </section>
 
       <section id="installation">
